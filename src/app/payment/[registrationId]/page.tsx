@@ -82,27 +82,30 @@ export default async function PaymentPage({ params }: PaymentPageProps) {
               </div>
 
               {/* Scannable PhonePe QR Image Container */}
-              <div className="relative mx-auto max-w-[320px] bg-white p-4 rounded-2xl shadow-2xl border-4 border-purple-500/20 group">
+              <div className="relative mx-auto max-w-[340px] bg-white p-3 rounded-2xl shadow-2xl border-4 border-purple-500/30">
                 <Image
                   src={qrImage}
-                  alt="Official PhonePe QR Code"
-                  width={300}
-                  height={390}
+                  alt="Official PhonePe QR Scanner - SAURABH KUMAR"
+                  width={400}
+                  height={520}
                   className="w-full h-auto object-contain rounded-xl"
                   priority
                 />
               </div>
 
-              {/* Merchant UPI ID display */}
-              <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-slate-400 flex items-center justify-between">
-                <span>Merchant UPI ID:</span>
-                <span className="font-mono font-bold text-orange-400 select-all">{upiId}</span>
+              {/* Verified Merchant Banner */}
+              <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-center justify-between">
+                <span className="text-slate-400">Verified Merchant:</span>
+                <span className="font-bold text-emerald-400 tracking-wide">SAURABH KUMAR</span>
               </div>
 
-              <p className="text-[11px] text-slate-500">
-                Tip: Keep the PhonePe receipt open or copy the 12-digit UTR/Ref number to submit
-                in the form.
-              </p>
+              <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800/80 text-[11px] text-slate-400 text-left space-y-1">
+                <p className="font-bold text-slate-300">Quick Payment Steps:</p>
+                <p>1. Open PhonePe, Google Pay, or Paytm on your mobile.</p>
+                <p>2. Tap <strong>Scan QR</strong> and scan the scanner above.</p>
+                <p>3. Pay the exact registration fee of <strong>₹{fee}</strong>.</p>
+                <p>4. Enter the 12-digit Transaction/UTR reference number on the right.</p>
+              </div>
             </div>
           </div>
 
