@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model EventSetting {
+  id                   String   @id @default("default")
+  eventName            String   @default("City Marathon 10K 2026")
+  eventTagline         String   @default("Run 10 KM. Challenge Yourself. Finish Strong.")
+  eventDate            String   @default("Sunday, October 18, 2026")
+  eventTime            String   @default("05:30 AM IST")
+  reportingTime        String   @default("04:45 AM IST")
+  venue                String   @default("Central Stadium Arena & Sports Complex, City Center")
+  distance             String   @default("10 KM")
+  registrationFee      Int      @default(499)
+  registrationDeadline DateTime @default("2026-10-15T23:59:59.000Z")
+  participantCapacity  Int      @default(2000)
+  contactEmail         String   @default("race-director@marathon10k.org")
+  contactPhone         String   @default("+91 98765 43210")
+  organizerName        String   @default("Marathon Sports Association")
+  phonePeQrPath        String   @default("/images/phonepe-qr.png")
+  phonePeUpiId         String   @default("marathon10k@phonepe")
+  bibPrefix            String   @default("BIB-")
+  regPrefix            String   @default("RUN10K-")
+  updatedAt            DateTime @updatedAt
+}
+
+model Participant {
+  id              String        @id @default(cuid())
+  fullName        String
+  mobile          String        @unique
+  email           String        @unique
+  dob             String
+  gender          String
+  city            String
+  state           String
+  emergencyName   String
+  emergencyMobile String
+  tshirtSize      String?
+  bloodGroup      String?
+  runningExp      String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  registration    Registration?
+}
+
+model Registration {
+  id                 String            @id @default(cuid())
+  registrationNumber String?           @unique
+  bibNumber          String?           @unique
+  participantId      String            @unique
+  participant        Participant       @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  status             String            @default("PENDING") // PENDING, CONFIRMED, REJECTED, CANCELLED
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  payment            Payment?
+  auditLogs          PaymentAuditLog[]
+}
+
+model Payment {
+  id              String       @id @default(cuid())
+  registrationId  String       @unique
+  registration    Registration @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+  amount          Int
+  transactionId   String?      @unique
+  proofPath       String?
+  proofFileName   String?
+  status          String       @default("PENDING") // PENDING, VERIFIED, REJECTED
+  rejectionReason String?
+  verifiedAt      DateTime?
+  verifiedBy      String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("SUPERADMIN")
+  createdAt    DateTime @default(now())
+}
+
+model PaymentAuditLog {
+  id                String       @id @default(cuid())
+  registrationId    String
+  registration      Registration @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+  adminEmail        String
+  action            String
+  oldPaymentStatus  String?
+  newPaymentStatus  String?
+  oldRegStatus      String?
+  newRegStatus      String?
+  notes             String?
+  timestamp         DateTime     @default(now())
+}

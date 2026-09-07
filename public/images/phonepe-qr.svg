@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" width="400" height="520" style="background:#ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
+  <!-- PhonePe Header -->
+  <rect width="400" height="90" fill="#5f259f" />
+  <circle cx="50" cy="45" r="22" fill="#ffffff" />
+  <text x="50" y="53" fill="#5f259f" font-size="24" font-weight="900" text-anchor="middle">पे</text>
+  <text x="85" y="42" fill="#ffffff" font-size="22" font-weight="800" letter-spacing="0.5">PhonePe</text>
+  <text x="85" y="60" fill="#e0d4f5" font-size="11" font-weight="500">ACCEPTED HERE</text>
+  
+  <rect x="300" y="32" width="75" height="26" rx="13" fill="#ffffff" />
+  <text x="337" y="49" fill="#5f259f" font-size="12" font-weight="700" text-anchor="middle">BHIM UPI</text>
+
+  <!-- Merchant Info -->
+  <rect x="25" y="105" width="350" height="50" rx="8" fill="#f4f0fa" />
+  <text x="200" y="126" fill="#5f259f" font-size="13" font-weight="700" text-anchor="middle">10 KM CITY MARATHON 2026</text>
+  <text x="200" y="143" fill="#666666" font-size="11" font-weight="500" text-anchor="middle">UPI ID: marathon10k@phonepe</text>
+
+  <!-- QR Frame -->
+  <rect x="50" y="170" width="300" height="300" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" />
+
+  <!-- QR Finder Patterns (Top-Left, Top-Right, Bottom-Left) -->
+  <!-- Top Left -->
+  <rect x="75" y="195" width="60" height="60" rx="6" fill="#1e293b" />
+  <rect x="85" y="205" width="40" height="40" rx="4" fill="#ffffff" />
+  <rect x="95" y="215" width="20" height="20" rx="2" fill="#5f259f" />
+
+  <!-- Top Right -->
+  <rect x="265" y="195" width="60" height="60" rx="6" fill="#1e293b" />
+  <rect x="275" y="205" width="40" height="40" rx="4" fill="#ffffff" />
+  <rect x="285" y="215" width="20" height="20" rx="2" fill="#5f259f" />
+
+  <!-- Bottom Left -->
+  <rect x="75" y="385" width="60" height="60" rx="6" fill="#1e293b" />
+  <rect x="85" y="395" width="40" height="40" rx="4" fill="#ffffff" />
+  <rect x="95" y="405" width="20" height="20" rx="2" fill="#5f259f" />
+
+  <!-- Simulated QR Data Blocks -->
+  <g fill="#1e293b">
+    <rect x="150" y="195" width="16" height="16" rx="2" />
+    <rect x="176" y="195" width="16" height="16" rx="2" />
+    <rect x="202" y="195" width="16" height="16" rx="2" />
+    <rect x="228" y="195" width="16" height="16" rx="2" />
+
+    <rect x="150" y="221" width="16" height="16" rx="2" />
+    <rect x="189" y="221" width="29" height="16" rx="2" />
+    <rect x="228" y="221" width="16" height="16" rx="2" />
+
+    <rect x="75" y="270" width="16" height="16" rx="2" />
+    <rect x="101" y="270" width="16" height="16" rx="2" />
+    <rect x="135" y="270" width="24" height="16" rx="2" />
+    <rect x="170" y="270" width="16" height="16" rx="2" />
+    <rect x="195" y="270" width="20" height="16" rx="2" />
+    <rect x="230" y="270" width="16" height="16" rx="2" />
+    <rect x="260" y="270" width="25" height="16" rx="2" />
+    <rect x="295" y="270" width="30" height="16" rx="2" />
+
+    <rect x="75" y="295" width="25" height="16" rx="2" />
+    <rect x="115" y="295" width="16" height="16" rx="2" />
+    <rect x="145" y="295" width="16" height="16" rx="2" />
+    <rect x="235" y="295" width="20" height="16" rx="2" />
+    <rect x="270" y="295" width="16" height="16" rx="2" />
+    <rect x="305" y="295" width="20" height="16" rx="2" />
+
+    <rect x="75" y="325" width="16" height="16" rx="2" />
+    <rect x="105" y="325" width="26" height="16" rx="2" />
+    <rect x="145" y="325" width="20" height="16" rx="2" />
+    <rect x="240" y="325" width="16" height="16" rx="2" />
+    <rect x="270" y="325" width="26" height="16" rx="2" />
+    <rect x="305" y="325" width="20" height="16" rx="2" />
+
+    <rect x="75" y="355" width="25" height="16" rx="2" />
+    <rect x="115" y="355" width="16" height="16" rx="2" />
+    <rect x="150" y="355" width="25" height="16" rx="2" />
+    <rect x="225" y="355" width="16" height="16" rx="2" />
+    <rect x="260" y="355" width="30" height="16" rx="2" />
+    <rect x="305" y="355" width="20" height="16" rx="2" />
+
+    <rect x="150" y="385" width="20" height="16" rx="2" />
+    <rect x="185" y="385" width="16" height="16" rx="2" />
+    <rect x="220" y="385" width="25" height="16" rx="2" />
+    <rect x="260" y="385" width="20" height="16" rx="2" />
+    <rect x="295" y="385" width="30" height="16" rx="2" />
+
+    <rect x="150" y="415" width="16" height="16" rx="2" />
+    <rect x="180" y="415" width="25" height="16" rx="2" />
+    <rect x="220" y="415" width="16" height="16" rx="2" />
+    <rect x="250" y="415" width="30" height="16" rx="2" />
+    <rect x="295" y="415" width="30" height="16" rx="2" />
+  </g>
+
+  <!-- Center PhonePe Badge -->
+  <circle cx="200" cy="320" r="26" fill="#ffffff" stroke="#5f259f" stroke-width="3" />
+  <circle cx="200" cy="320" r="21" fill="#5f259f" />
+  <text x="200" y="328" fill="#ffffff" font-size="22" font-weight="900" text-anchor="middle">पे</text>
+
+  <!-- Footer Info -->
+  <text x="200" y="495" fill="#475569" font-size="12" font-weight="600" text-anchor="middle">Scan &amp; Pay Using PhonePe, GPay, Paytm, or Any UPI App</text>
+</svg>
