@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
       },
       create: {
         registrationId,
-        amount: 499,
+        amount: 100,
         transactionId: cleanTransactionId,
         proofPath: savedFilePath,
         proofFileName: savedFileName,

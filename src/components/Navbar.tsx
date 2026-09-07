@@ -161,7 +161,7 @@ export default function Navbar({ eventName = "10K CITY MARATHON" }: NavbarProps)
               onClick={() => setMobileMenuOpen(false)}
               className="w-full flex items-center justify-center gap-2 py-3 rounded-lg athletic-gradient text-sm font-bold text-white shadow-lg shadow-orange-500/30"
             >
-              Register Now (₹499)
+              Register Now (₹100)
             </Link>
             <div className="text-center pt-2">
               <Link

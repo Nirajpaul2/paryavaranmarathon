@@ -733,7 +733,7 @@ export default function RegisterPage() {
               <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800/80">
                 <div className="text-slate-400 text-xs font-semibold mb-1">Registration Fee</div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-black text-white">₹499</span>
+                  <span className="text-3xl font-black text-white">₹100</span>
                   <span className="text-[11px] text-slate-500 font-medium">(All taxes included)</span>
                 </div>
               </div>

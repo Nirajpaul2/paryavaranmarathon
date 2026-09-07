@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
           },
           create: {
             registrationId,
-            amount: 499,
+            amount: 100,
             status: "VERIFIED",
             verifiedAt: new Date(),
             verifiedBy: admin.email,
@@ -110,7 +110,7 @@ export async function POST(req: NextRequest) {
           },
           create: {
             registrationId,
-            amount: 499,
+            amount: 100,
             status: "REJECTED",
             rejectionReason: rejectionReason?.trim(),
             verifiedAt: new Date(),

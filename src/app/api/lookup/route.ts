@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
         tshirtSize: registration.participant.tshirtSize,
         bloodGroup: registration.participant.bloodGroup,
         paymentStatus: registration.payment?.status || "PENDING",
-        paymentAmount: registration.payment?.amount || settings?.registrationFee || 499,
+        paymentAmount: registration.payment?.amount || settings?.registrationFee || 100,
         transactionId: registration.payment?.transactionId
           ? `${registration.payment.transactionId.slice(0, 4)}****${registration.payment.transactionId.slice(-4)}`
           : null,

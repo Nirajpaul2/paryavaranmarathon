@@ -29,7 +29,7 @@ export default async function PaymentPage({ params }: PaymentPageProps) {
   }
 
   const settings = await prisma.eventSetting.findFirst();
-  const fee = registration.payment?.amount || settings?.registrationFee || 499;
+  const fee = registration.payment?.amount || settings?.registrationFee || 100;
   const qrImage = settings?.phonePeQrPath || "/images/phonepe-qr.svg";
   const upiId = settings?.phonePeUpiId || "marathon10k@phonepe";
 

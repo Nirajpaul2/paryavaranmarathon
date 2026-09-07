@@ -54,7 +54,7 @@ export default function SettingsClient({
     reportingTime: initialSettings?.reportingTime || "04:45 AM IST",
     venue: initialSettings?.venue || "Central Stadium Arena & Sports Complex, City Center",
     distance: initialSettings?.distance || "10 KM",
-    registrationFee: initialSettings?.registrationFee || 499,
+    registrationFee: initialSettings?.registrationFee || 100,
     registrationDeadline: initialSettings?.registrationDeadline
       ? new Date(initialSettings.registrationDeadline).toISOString().slice(0, 16)
       : "2026-10-15T23:59",

@@ -28,7 +28,7 @@ async function getSettings() {
     reportingTime: "04:45 AM IST",
     venue: "Central Stadium Arena & Sports Complex, City Center",
     distance: "10 KM",
-    registrationFee: 499,
+    registrationFee: 100,
     participantCapacity: 1500,
     contactEmail: "support@marathon10k.org",
     contactPhone: "+91 98765 43210",

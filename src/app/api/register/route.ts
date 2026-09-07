@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 
     // 2. Load Event Settings
     const settings = await prisma.eventSetting.findFirst();
-    const fee = settings?.registrationFee ?? 499;
+    const fee = settings?.registrationFee ?? 100;
     const capacity = settings?.participantCapacity ?? 1500;
     const deadline = settings?.registrationDeadline
       ? new Date(settings.registrationDeadline)
