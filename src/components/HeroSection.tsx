@@ -42,16 +42,25 @@ export default function HeroSection({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column: Headlines & Call to Actions */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            {/* Top Go Green Badges */}
+            {/* Top Go Green & Perk Badges */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
               <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-black uppercase tracking-wider">
                 <Leaf className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />
                 Go Green Initiative
               </span>
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold uppercase tracking-wider">
-                <Trophy className="w-3.5 h-3.5 text-amber-400" />
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold uppercase tracking-wider">
+                <Trophy className="w-3.5 h-3.5 text-emerald-400" />
                 5 KM Running Challenge
               </span>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.aiwazir.sanatan.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/50 text-amber-300 text-xs font-bold uppercase tracking-wider hover:bg-amber-500/30 transition-colors"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                Bonus: 1 Month Free Sanatan Dham App
+              </a>
             </div>
 
             {/* Main Title */}

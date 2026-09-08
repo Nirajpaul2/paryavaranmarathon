@@ -19,6 +19,9 @@ import {
   Trophy,
   Loader2,
   ChevronLeft,
+  Gift,
+  Sparkles,
+  ExternalLink,
 } from "lucide-react";
 
 export default function RegisterPage() {
@@ -739,6 +742,29 @@ export default function RegisterPage() {
                   <span className="text-3xl font-black text-white">₹99</span>
                   <span className="text-[11px] text-slate-500 font-medium">(All taxes included)</span>
                 </div>
+              </div>
+
+              {/* Special Participant Bonus: Sanatan Dham App */}
+              <div className="bg-gradient-to-br from-amber-500/15 via-slate-950 to-emerald-950/30 p-4 rounded-2xl border border-amber-500/40 space-y-2">
+                <div className="flex items-center gap-1.5 text-amber-300 text-[11px] font-black uppercase tracking-wider">
+                  <Gift className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Free Bonus Included</span>
+                </div>
+                <div className="text-xs font-bold text-white leading-snug">
+                  1 Month Free Service — सनातन धाम App
+                </div>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  प्रत्येक पंजीकृत धावक को सनातन धाम ऐप की 1 महीने की सेवा मुफ्त मिलेगी।
+                </p>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.aiwazir.sanatan.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-400 hover:text-amber-300 underline underline-offset-2 pt-0.5"
+                >
+                  <span>Download on Google Play</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
 
               <div className="text-[11px] text-slate-400 flex items-center gap-2 pt-2 border-t border-slate-800">

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Leaf, Phone, MapPin, Award, HeartHandshake } from "lucide-react";
+import { Leaf, Phone, MapPin, Award, HeartHandshake, ExternalLink } from "lucide-react";
 
 interface FooterProps {
   eventName?: string;
@@ -76,6 +76,17 @@ export default function Footer({
                 <Link href="/#faq" className="hover:text-emerald-400 transition-colors">
                   FAQs (अक्सर पूछे जाने वाले सवाल)
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.aiwazir.sanatan.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-amber-300 hover:text-amber-200 transition-colors inline-flex items-center gap-1 font-bold"
+                >
+                  <span>सनातन धाम App (1 Month Free)</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </li>
               <li>
                 <Link href="/admin/login" className="text-emerald-600 hover:text-emerald-400 transition-colors">

@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import prisma from "@/lib/prisma";
 import PrintButton from "./PrintButton";
-import { Flame, Trophy, Calendar, MapPin, CheckCircle2, QrCode, ArrowLeft } from "lucide-react";
+import { Flame, Trophy, Calendar, MapPin, CheckCircle2, QrCode, ArrowLeft, Gift, Smartphone, ExternalLink } from "lucide-react";
 
 interface CardPageProps {
   params: {
@@ -207,6 +207,39 @@ export default async function RegistrationCardPage({ params }: CardPageProps) {
                 </span>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Special Participant Perk: Sanatan Dham App Free 1 Month */}
+        <div className="no-print mt-6 bg-gradient-to-r from-amber-500/15 via-slate-900 to-amber-500/15 border-2 border-amber-500/30 rounded-3xl p-6 sm:p-7 shadow-xl">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
+            <div className="flex items-center gap-4 text-center sm:text-left">
+              <div className="w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shrink-0">
+                <Gift className="w-7 h-7 text-amber-300" />
+              </div>
+              <div className="space-y-1">
+                <span className="text-[11px] font-black uppercase tracking-wider text-amber-400 block">
+                  Exclusive Participant Benefit
+                </span>
+                <h3 className="text-lg sm:text-xl font-black text-white">
+                  1 Month Free Service — सनातन धाम (Sanatan Dham) App
+                </h3>
+                <p className="text-xs text-slate-300">
+                  सभी पंजीकृत धावकों के लिए 1 महीने की सेवा मुफ्त। अभी गूगल प्ले स्टोर से डाउनलोड करें।
+                </p>
+              </div>
+            </div>
+
+            <a
+              href="https://play.google.com/store/apps/details?id=com.aiwazir.sanatan.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black text-xs uppercase tracking-wider hover:opacity-95 shadow-lg shadow-amber-500/20 hover:scale-105 active:scale-95 transition-all"
+            >
+              <Smartphone className="w-4 h-4 text-slate-950" />
+              <span>Download on Google Play</span>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-950" />
+            </a>
           </div>
         </div>
       </main>

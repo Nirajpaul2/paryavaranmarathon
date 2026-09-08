@@ -1,5 +1,5 @@
 import React from "react";
-import { Trophy, Award, Medal, Bike, Shirt, Footprints, Sparkles, Check } from "lucide-react";
+import { Trophy, Award, Medal, Bike, Shirt, Footprints, Sparkles, Check, Gift, Smartphone, ExternalLink } from "lucide-react";
 
 export default function PrizeSection() {
   const podiumPrizes = [
@@ -131,6 +131,40 @@ export default function PrizeSection() {
                 आधिकारिक पर्यावरण मैराथन मेडल सभी टॉप 30 धावकों के लिए
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* Special Participant Bonus: 1 Month Free Sanatan Dham App */}
+        <div className="mt-10 max-w-4xl mx-auto bg-gradient-to-r from-amber-500/15 via-[#0d3b25] to-amber-500/15 border-2 border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shrink-0 shadow-lg shadow-amber-500/30">
+                <Gift className="w-8 h-8 text-slate-950" />
+              </div>
+              <div className="space-y-1.5">
+                <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-[11px] font-extrabold uppercase tracking-wider">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  प्रत्येक प्रतिभागी के लिए विशेष उपहार
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-white">
+                  1 Month Free Service — सनातन धाम (Sanatan Dham) App
+                </h3>
+                <p className="text-xs sm:text-sm text-emerald-100/90 max-w-xl leading-relaxed">
+                  मैराथन में पंजीकरण कराने वाले प्रत्येक धावक को सनातन धाम ऐप की 1 महीने की सेवा बिल्कुल मुफ्त (Free) उपलब्ध कराई जाएगी!
+                </p>
+              </div>
+            </div>
+
+            <a
+              href="https://play.google.com/store/apps/details?id=com.aiwazir.sanatan.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-slate-950 font-black text-xs uppercase tracking-wider hover:opacity-95 shadow-xl shadow-amber-500/25 hover:scale-105 active:scale-95 transition-all"
+            >
+              <Smartphone className="w-4 h-4 text-slate-950" />
+              <span>Download Sanatan Dham</span>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-950" />
+            </a>
           </div>
         </div>
 
