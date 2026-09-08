@@ -192,18 +192,18 @@ export default function PaymentFormClient({
         {/* Transaction ID / UTR */}
         <div>
           <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-            PhonePe Transaction / UTR / Reference ID <span className="text-orange-500">*</span>
+            UPI / PhonePe / GPay / Paytm UTR Reference ID <span className="text-orange-500">*</span>
           </label>
           <input
             type="text"
             required
             value={transactionId}
             onChange={(e) => setTransactionId(e.target.value)}
-            placeholder="e.g. T2609071402938472910 or 12-digit UTR"
+            placeholder="e.g. 12-digit UTR (e.g. 423589102934) or PhonePe Txn ID"
             className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white font-mono placeholder-slate-600 uppercase focus:outline-none focus:border-orange-500 transition-colors"
           />
           <p className="text-[11px] text-slate-500 mt-1">
-            Found on the PhonePe transaction success screen or under payment history.
+            Found on the UPI payment success receipt (PhonePe, Google Pay, Paytm, or BHIM).
           </p>
         </div>
 

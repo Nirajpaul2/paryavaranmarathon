@@ -29,7 +29,7 @@ async function main() {
         contactPhone: "8340477782",
         organizerName: "संस्थापक: नीरज स्टार",
         phonePeQrPath: "/images/phonepe-qr.svg",
-        phonePeUpiId: "8340477782@ybl",
+        phonePeUpiId: "7367050371@ybl",
         bibPrefix: "BIB-",
         regPrefix: "RUN5K-",
       },

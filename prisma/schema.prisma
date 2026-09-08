@@ -23,7 +23,7 @@ model EventSetting {
   contactPhone         String   @default("8340477782")
   organizerName        String   @default("संस्थापक: नीरज स्टार")
   phonePeQrPath        String   @default("/images/phonepe-qr.svg")
-  phonePeUpiId         String   @default("8340477782@ybl")
+  phonePeUpiId         String   @default("7367050371@ybl")
   bibPrefix            String   @default("BIB-")
   regPrefix            String   @default("RUN5K-")
   updatedAt            DateTime @updatedAt

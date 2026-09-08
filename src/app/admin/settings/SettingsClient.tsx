@@ -62,7 +62,7 @@ export default function SettingsClient({
     contactEmail: initialSettings?.contactEmail || "support@paryavaranmarathon.org",
     contactPhone: initialSettings?.contactPhone || "8340477782",
     organizerName: initialSettings?.organizerName || "संस्थापक: नीरज स्टार",
-    phonePeUpiId: initialSettings?.phonePeUpiId || "8340477782@ybl",
+    phonePeUpiId: initialSettings?.phonePeUpiId || "7367050371@ybl",
     bibPrefix: initialSettings?.bibPrefix || "BIB-",
     regPrefix: initialSettings?.regPrefix || "RUN5K-",
   });

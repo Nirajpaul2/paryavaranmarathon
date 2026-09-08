@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import prisma from "@/lib/prisma";
 import PaymentFormClient from "./PaymentFormClient";
+import UpiPaymentButtons from "./UpiPaymentButtons";
 import { ShieldCheck, QrCode, Clock, Info, AlertTriangle } from "lucide-react";
 
 interface PaymentPageProps {
@@ -31,7 +32,8 @@ export default async function PaymentPage({ params }: PaymentPageProps) {
   const settings = await prisma.eventSetting.findFirst();
   const fee = registration.payment?.amount || settings?.registrationFee || 99;
   const qrImage = settings?.phonePeQrPath || "/images/phonepe-qr.svg";
-  const upiId = settings?.phonePeUpiId || "8340477782@ybl";
+  const upiId = settings?.phonePeUpiId || "7367050371@ybl";
+  const payeeName = "SAURABH KUMAR";
 
   return (
     <div className="min-h-screen bg-[#0b0f19] flex flex-col text-slate-100">
@@ -70,6 +72,26 @@ export default async function PaymentPage({ params }: PaymentPageProps) {
                 </span>
               </div>
 
+              {/* Mobile 1-Tap UPI Intent Payment Buttons */}
+              <UpiPaymentButtons
+                upiId={upiId}
+                payeeName={payeeName}
+                amount={fee}
+                participantName={registration.participant.fullName}
+              />
+
+              {/* Divider: OR SCAN QR CODE */}
+              <div className="relative py-1">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-slate-800" />
+                </div>
+                <div className="relative flex justify-center text-[10px] uppercase">
+                  <span className="bg-slate-900 px-3 text-slate-400 font-bold tracking-wider">
+                    Or Scan QR (Laptop / Second Phone)
+                  </span>
+                </div>
+              </div>
+
               {/* Prominent Instruction */}
               <div className="bg-[#5f259f]/15 border border-[#5f259f]/40 py-2.5 px-4 rounded-xl">
                 <span className="text-sm font-black text-purple-300 uppercase tracking-wide flex items-center justify-center gap-2">
@@ -96,15 +118,15 @@ export default async function PaymentPage({ params }: PaymentPageProps) {
               {/* Verified Merchant Banner */}
               <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 text-xs text-slate-300 flex items-center justify-between">
                 <span className="text-slate-400">Verified Merchant:</span>
-                <span className="font-bold text-emerald-400 tracking-wide">SAURABH KUMAR</span>
+                <span className="font-bold text-emerald-400 tracking-wide">{payeeName}</span>
               </div>
 
               <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800/80 text-[11px] text-slate-400 text-left space-y-1">
                 <p className="font-bold text-slate-300">Quick Payment Steps:</p>
-                <p>1. Open PhonePe, Google Pay, or Paytm on your mobile.</p>
-                <p>2. Tap <strong>Scan QR</strong> and scan the scanner above.</p>
-                <p>3. Pay the exact registration fee of <strong>₹{fee}</strong>.</p>
-                <p>4. Enter the 12-digit Transaction/UTR reference number on the right.</p>
+                <p>1. Tap <strong>Open Installed UPI App</strong> above (or scan the QR code).</p>
+                <p>2. Complete payment of <strong>₹{fee}</strong> in your payment app.</p>
+                <p>3. Copy the 12-digit Transaction/UTR reference number from your app.</p>
+                <p>4. Enter the UTR on the right and submit for official verification.</p>
               </div>
             </div>
           </div>
