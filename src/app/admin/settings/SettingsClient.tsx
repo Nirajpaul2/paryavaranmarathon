@@ -46,25 +46,25 @@ export default function SettingsClient({
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    eventName: initialSettings?.eventName || "10 KM City Marathon 2026",
+    eventName: initialSettings?.eventName || "पर्यावरण मैराथन (Paryavaran Marathon 2026)",
     eventTagline:
-      initialSettings?.eventTagline || "Run 10 KM. Challenge Yourself. Finish Strong.",
-    eventDate: initialSettings?.eventDate || "Sunday, October 18, 2026",
-    eventTime: initialSettings?.eventTime || "05:30 AM IST",
-    reportingTime: initialSettings?.reportingTime || "04:45 AM IST",
-    venue: initialSettings?.venue || "Central Stadium Arena & Sports Complex, City Center",
-    distance: initialSettings?.distance || "10 KM",
-    registrationFee: initialSettings?.registrationFee || 100,
+      initialSettings?.eventTagline || "हर कदम प्रकृति के नाम • Fit For a Greener Tomorrow",
+    eventDate: initialSettings?.eventDate || "27 सितंबर 2026 (रविवार)",
+    eventTime: initialSettings?.eventTime || "06:00 AM IST",
+    reportingTime: initialSettings?.reportingTime || "05:15 AM IST",
+    venue: initialSettings?.venue || "राजकीय उत्क्रमित मध्य विद्यालय मालती पूर्वी",
+    distance: initialSettings?.distance || "5 KM",
+    registrationFee: initialSettings?.registrationFee || 99,
     registrationDeadline: initialSettings?.registrationDeadline
       ? new Date(initialSettings.registrationDeadline).toISOString().slice(0, 16)
-      : "2026-10-15T23:59",
+      : "2026-09-26T23:59",
     participantCapacity: initialSettings?.participantCapacity || 1500,
-    contactEmail: initialSettings?.contactEmail || "support@marathon10k.org",
-    contactPhone: initialSettings?.contactPhone || "+91 98765 43210",
-    organizerName: initialSettings?.organizerName || "Marathon Sports Association",
-    phonePeUpiId: initialSettings?.phonePeUpiId || "marathon10k@phonepe",
+    contactEmail: initialSettings?.contactEmail || "support@paryavaranmarathon.org",
+    contactPhone: initialSettings?.contactPhone || "8340477782",
+    organizerName: initialSettings?.organizerName || "संस्थापक: नीरज स्टार",
+    phonePeUpiId: initialSettings?.phonePeUpiId || "8340477782@ybl",
     bibPrefix: initialSettings?.bibPrefix || "BIB-",
-    regPrefix: initialSettings?.regPrefix || "RUN10K-",
+    regPrefix: initialSettings?.regPrefix || "RUN5K-",
   });
 
   const [qrPath, setQrPath] = useState(
@@ -379,7 +379,7 @@ export default function SettingsClient({
                   required
                   value={formData.regPrefix}
                   onChange={handleInputChange}
-                  placeholder="RUN10K-"
+                  placeholder="RUN5K-"
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white font-mono"
                 />
               </div>

@@ -54,7 +54,7 @@ export default function AdminLayout({ children, adminName = "Race Director" }: A
           <div className="w-8 h-8 rounded-lg athletic-gradient flex items-center justify-center text-white">
             <Flame className="w-4 h-4" />
           </div>
-          <span className="font-black text-sm text-white">10K Race Admin</span>
+          <span className="font-black text-sm text-white">Paryavaran Marathon Admin</span>
         </div>
         <button
           onClick={() => setMobileOpen(!mobileOpen)}

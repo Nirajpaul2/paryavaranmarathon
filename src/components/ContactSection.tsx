@@ -1,62 +1,67 @@
 import React from "react";
-import { Mail, Phone, MapPin, Clock, MessageSquare } from "lucide-react";
+import { Phone, MapPin, UserCheck, MessageSquare, Calendar } from "lucide-react";
 
 interface ContactSectionProps {
-  contactEmail: string;
-  contactPhone: string;
-  venue: string;
-  organizerName: string;
+  contactPhone?: string;
+  venue?: string;
+  organizerName?: string;
 }
 
 export default function ContactSection({
-  contactEmail,
-  contactPhone,
-  venue,
-  organizerName,
+  contactPhone = "8340477782",
+  venue = "राजकीय उत्क्रमित मध्य विद्यालय मालती पूर्वी",
+  organizerName = "संस्थापक: नीरज स्टार",
 }: ContactSectionProps) {
   return (
-    <section id="contact" className="py-20 bg-[#090e1a]">
+    <section id="contact" className="py-20 bg-[#051c13] border-t border-emerald-900/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider mb-3">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs font-bold uppercase tracking-wider">
             <MessageSquare className="w-3.5 h-3.5" />
-            <span>Race Helpdesk</span>
+            <span>Event Helpline</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight">
-            Contact Event Organizers
+            संपर्क एवं सहायता (Contact Us)
           </h2>
-          <p className="mt-3 text-slate-400 text-sm sm:text-base leading-relaxed">
-            Need assistance with your registration or have questions about race day logistics?
-            Our event support team is here to assist.
+          <p className="text-emerald-200/80 text-sm sm:text-base leading-relaxed">
+            Contact for Registration &amp; Event Information
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center space-y-3">
-            <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/30 text-orange-400 mx-auto flex items-center justify-center">
+          {/* Card 1: Helpline Phone */}
+          <div className="bg-[#08291b] border border-emerald-800/80 rounded-3xl p-6 text-center space-y-3 shadow-lg hover:border-emerald-500 transition-colors">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 mx-auto flex items-center justify-center">
               <Phone className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-white uppercase">Phone Helpline</h3>
-            <p className="text-xs text-slate-400">Available Mon-Sat (9 AM - 7 PM)</p>
-            <p className="text-sm font-semibold text-white">{contactPhone}</p>
+            <h3 className="text-base font-bold text-white uppercase">आधिकारिक हेल्पलाइन</h3>
+            <p className="text-xs text-emerald-300/70">कॉल या व्हाट्सएप करें</p>
+            <a
+              href={`tel:${contactPhone}`}
+              className="inline-block text-lg font-black text-amber-300 hover:text-white transition-colors"
+            >
+              {contactPhone}
+            </a>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center space-y-3">
-            <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 mx-auto flex items-center justify-center">
-              <Mail className="w-6 h-6" />
+          {/* Card 2: Founder / Organizer */}
+          <div className="bg-[#08291b] border border-emerald-800/80 rounded-3xl p-6 text-center space-y-3 shadow-lg hover:border-emerald-500 transition-colors">
+            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 text-amber-300 mx-auto flex items-center justify-center">
+              <UserCheck className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-white uppercase">Email Support</h3>
-            <p className="text-xs text-slate-400">Queries answered within 24 hours</p>
-            <p className="text-sm font-semibold text-white break-all">{contactEmail}</p>
+            <h3 className="text-base font-bold text-white uppercase">आयोजन नेतृत्व</h3>
+            <p className="text-xs text-emerald-300/70">मैराथन संस्थापक</p>
+            <p className="text-sm font-black text-white">{organizerName}</p>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center space-y-3">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 mx-auto flex items-center justify-center">
+          {/* Card 3: Venue & Location */}
+          <div className="bg-[#08291b] border border-emerald-800/80 rounded-3xl p-6 text-center space-y-3 shadow-lg hover:border-emerald-500 transition-colors">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 mx-auto flex items-center justify-center">
               <MapPin className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-white uppercase">Race Arena</h3>
-            <p className="text-xs text-slate-400">{organizerName}</p>
-            <p className="text-sm font-semibold text-white">{venue}</p>
+            <h3 className="text-base font-bold text-white uppercase">दौड़ स्थल (Venue)</h3>
+            <p className="text-xs text-emerald-300/70">मालती, समस्तीपुर</p>
+            <p className="text-xs font-bold text-white leading-relaxed">{venue}</p>
           </div>
         </div>
       </div>

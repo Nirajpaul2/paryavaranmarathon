@@ -9,20 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        athletic: {
-          orange: "#FF5500",
-          "orange-hover": "#E04B00",
-          volt: "#CCFF00",
-          navy: "#0A1128",
-          dark: "#0F172A",
-          card: "#1E293B",
-          border: "#334155",
-          muted: "#94A3B8",
+        eco: {
+          green: "#16a34a",
+          "green-hover": "#15803d",
+          light: "#22c55e",
+          lime: "#84cc16",
+          gold: "#eab308",
+          dark: "#051a11",
+          card: "#0a261a",
+          surface: "#0f3323",
+          border: "#1b4d36",
+          muted: "#86efac",
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "Inter", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "Impact", "Oswald", "system-ui", "sans-serif"],
+        sans: ["var(--font-sans)", "Inter", "system-ui", "-apple-system", "sans-serif"],
       },
     },
   },

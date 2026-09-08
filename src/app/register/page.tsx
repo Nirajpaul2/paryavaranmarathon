@@ -46,7 +46,7 @@ export default function RegisterPage() {
     emergencyMobile: "",
     tshirtSize: "M",
     bloodGroup: "O+",
-    runningExp: "First-time 10K runner",
+    runningExp: "First-time 5K runner",
   });
 
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -275,10 +275,10 @@ export default function RegisterPage() {
               >
                 <div>
                   <h2 className="text-2xl font-black text-white uppercase tracking-tight">
-                    10 KM Marathon Registration
+                    पर्यावरण मैराथन — 5 KM Registration
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-400 mt-1">
-                    Fill out the required information below to reserve your runner slot.
+                    Fill out the required information below to reserve your runner slot for the 5 KM Paryavaran Marathon.
                   </p>
                 </div>
 
@@ -551,9 +551,10 @@ export default function RegisterPage() {
                         onChange={handleInputChange}
                         className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-orange-500 transition-colors"
                       >
+                        <option value="First-time 5K runner">First-time 5K runner</option>
+                        <option value="Casual runner (5K)">Casual runner (5K)</option>
+                        <option value="Seasoned 5K runner">Seasoned 5K runner</option>
                         <option value="First-time 10K runner">First-time 10K runner</option>
-                        <option value="Casual runner (5K-10K)">Casual runner (5K-10K)</option>
-                        <option value="Seasoned 10K runner">Seasoned 10K runner</option>
                         <option value="Half Marathon / Marathon runner">
                           Half / Full Marathoner
                         </option>
@@ -709,23 +710,25 @@ export default function RegisterPage() {
               <div className="space-y-4 text-xs">
                 <div className="flex justify-between items-center py-2 border-b border-slate-800">
                   <span className="text-slate-400">Race Distance</span>
-                  <span className="font-bold text-white text-sm">10 KM Timed</span>
+                  <span className="font-bold text-white text-sm">5 KM Timed Run</span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-slate-800">
                   <span className="text-slate-400">Flag-off Time</span>
-                  <span className="font-bold text-white">05:30 AM IST</span>
+                  <span className="font-bold text-white">06:00 AM IST, 27 Sep 2026</span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-slate-800">
                   <span className="text-slate-400">Venue</span>
-                  <span className="font-bold text-white text-right">Central Stadium Arena</span>
+                  <span className="font-bold text-white text-right max-w-[180px]">
+                    राजकीय उत्क्रमित मध्य विद्यालय मालती पूर्वी
+                  </span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-slate-800">
-                  <span className="text-slate-400">Timing Chip</span>
-                  <span className="font-bold text-emerald-400">Included</span>
+                  <span className="text-slate-400">Awards &amp; Prizes</span>
+                  <span className="font-bold text-emerald-400">Top 10 Prizes • Top 30 Medals</span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-slate-800">
-                  <span className="text-slate-400">Finisher Medal &amp; Tee</span>
-                  <span className="font-bold text-emerald-400">Included</span>
+                  <span className="text-slate-400">Runner Kit</span>
+                  <span className="font-bold text-emerald-400">T-Shirt &amp; Official Kit</span>
                 </div>
               </div>
 
@@ -733,7 +736,7 @@ export default function RegisterPage() {
               <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800/80">
                 <div className="text-slate-400 text-xs font-semibold mb-1">Registration Fee</div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-black text-white">₹100</span>
+                  <span className="text-3xl font-black text-white">₹99</span>
                   <span className="text-[11px] text-slate-500 font-medium">(All taxes included)</span>
                 </div>
               </div>

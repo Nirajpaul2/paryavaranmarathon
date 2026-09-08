@@ -6,7 +6,7 @@ export default function BenefitsSection() {
     {
       icon: <Medal className="w-8 h-8 text-amber-400" />,
       title: "Finisher Medal",
-      desc: "Custom die-cast metal medal engraved with 10 KM Finisher emblem and year ribbon.",
+      desc: "Official recognition medal for top 30 finishers with official ribbon.",
     },
     {
       icon: <Shirt className="w-8 h-8 text-orange-400" />,

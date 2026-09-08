@@ -2,7 +2,7 @@ import prisma from "./prisma";
 
 export async function generateRegistrationAndBibNumbers() {
   const settings = await prisma.eventSetting.findFirst();
-  const regPrefix = settings?.regPrefix || "RUN10K-";
+  const regPrefix = settings?.regPrefix || "RUN5K-";
   const bibPrefix = settings?.bibPrefix || "BIB-";
 
   // Count existing confirmed registrations to calculate the next sequence number

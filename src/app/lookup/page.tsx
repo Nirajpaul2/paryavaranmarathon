@@ -212,7 +212,7 @@ export default function LookupPage() {
                     <span className="text-[11px] font-semibold text-slate-500 uppercase block">
                       Race Distance
                     </span>
-                    <span className="text-lg sm:text-xl font-bold text-white">10 KM Timed</span>
+                    <span className="text-lg sm:text-xl font-bold text-white">5 KM Timed</span>
                   </div>
                 </div>
 

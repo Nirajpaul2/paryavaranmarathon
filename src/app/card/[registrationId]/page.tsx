@@ -29,11 +29,11 @@ export default async function RegistrationCardPage({ params }: CardPageProps) {
   }
 
   const settings = await prisma.eventSetting.findFirst();
-  const eventName = settings?.eventName || "10 KM City Marathon 2026";
-  const eventDate = settings?.eventDate || "Sunday, October 18, 2026";
-  const eventTime = settings?.eventTime || "05:30 AM IST";
-  const reportingTime = settings?.reportingTime || "04:45 AM IST";
-  const venue = settings?.venue || "Central Stadium Arena & Sports Complex";
+  const eventName = settings?.eventName || "पर्यावरण मैराथन 2026 (Paryavaran Marathon)";
+  const eventDate = settings?.eventDate || "27 सितंबर 2026 (रविवार)";
+  const eventTime = settings?.eventTime || "06:00 AM IST";
+  const reportingTime = settings?.reportingTime || "05:15 AM IST";
+  const venue = settings?.venue || "राजकीय उत्क्रमित मध्य विद्यालय मालती पूर्वी";
 
   const isConfirmed = registration.status === "CONFIRMED";
 
@@ -88,15 +88,15 @@ export default async function RegistrationCardPage({ params }: CardPageProps) {
                 <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight mt-2">
                   {eventName}
                 </h1>
-                <p className="text-xs font-semibold text-orange-100">
-                  Certified 10 KM Road Running Challenge
+                <p className="text-xs font-semibold text-emerald-100">
+                  पर्यावरण मैराथन (5 KM) • Fit For a Greener Tomorrow
                 </p>
               </div>
 
               <div className="text-right flex sm:flex-col items-baseline sm:items-end justify-between">
-                <span className="text-3xl sm:text-4xl font-black">10 KM</span>
-                <span className="text-xs uppercase tracking-wider font-bold text-orange-100">
-                  Chip Timed Run
+                <span className="text-3xl sm:text-4xl font-black">5 KM</span>
+                <span className="text-xs uppercase tracking-wider font-bold text-emerald-100">
+                  पर्यावरण मैराथन
                 </span>
               </div>
             </div>
@@ -107,7 +107,7 @@ export default async function RegistrationCardPage({ params }: CardPageProps) {
             {/* Center Bib Display */}
             <div className="bg-slate-950 border-2 border-dashed border-slate-800 rounded-2xl p-6 sm:p-8 text-center space-y-2 print:border-slate-400 print:bg-white">
               <span className="text-xs uppercase font-extrabold tracking-widest text-slate-400 print:text-slate-600 block">
-                Official Marathon Bib Number
+                Official 5 KM Bib Number
               </span>
               <div className="text-5xl sm:text-7xl font-black text-orange-400 font-mono tracking-tight print:text-black">
                 {registration.bibNumber || "PENDING"}
@@ -203,7 +203,7 @@ export default async function RegistrationCardPage({ params }: CardPageProps) {
                   <QrCode className="w-16 h-16 text-slate-900" />
                 </div>
                 <span className="text-[9px] font-mono font-bold text-slate-700 block mt-0.5">
-                  VERIFIED-10K
+                  VERIFIED-5K
                 </span>
               </div>
             </div>

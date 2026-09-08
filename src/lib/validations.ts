@@ -45,6 +45,9 @@ export const RegistrationSchema = z.object({
     .optional(),
   runningExp: z
     .enum([
+      "First-time 5K runner",
+      "Casual runner (5K)",
+      "Seasoned 5K runner",
       "First-time 10K runner",
       "Casual runner (5K-10K)",
       "Seasoned 10K runner",

@@ -2,9 +2,10 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
+import PrizeSection from "@/components/PrizeSection";
 import RaceDetails from "@/components/RaceDetails";
 import RouteSection from "@/components/RouteSection";
-import BenefitsSection from "@/components/BenefitsSection";
+import AboutSection from "@/components/AboutSection";
 import EligibilityRules from "@/components/EligibilityRules";
 import FaqSection from "@/components/FaqSection";
 import ContactSection from "@/components/ContactSection";
@@ -21,18 +22,17 @@ async function getSettings() {
   }
 
   return {
-    eventName: "10 KM City Marathon 2026",
-    eventTagline: "Run 10 KM. Challenge Yourself. Finish Strong.",
-    eventDate: "Sunday, October 18, 2026",
-    eventTime: "05:30 AM IST",
-    reportingTime: "04:45 AM IST",
-    venue: "Central Stadium Arena & Sports Complex, City Center",
-    distance: "10 KM",
-    registrationFee: 100,
+    eventName: "Paryavaran Marathon Samastipur 2026",
+    eventTagline: "“हर कदम प्रकृति के नाम” — Fit For a Greener Tomorrow",
+    eventDate: "27 सितंबर 2026 (रविवार)",
+    eventTime: "06:45 AM IST",
+    reportingTime: "06:00 AM IST",
+    venue: "राजकीय उत्क्रमित मध्य विद्यालय मालती पूर्वी",
+    distance: "5 KM",
+    registrationFee: 99,
     participantCapacity: 1500,
-    contactEmail: "support@marathon10k.org",
-    contactPhone: "+91 98765 43210",
-    organizerName: "Athletics & Marathon Association",
+    contactPhone: "8340477782",
+    organizerName: "संस्थापक: नीरज स्टार",
   };
 }
 
@@ -40,12 +40,12 @@ export default async function HomePage() {
   const settings = await getSettings();
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0b0f19]">
-      <Navbar eventName={settings.eventName} />
+    <div className="flex flex-col min-h-screen bg-[#051a11] text-emerald-50">
+      <Navbar eventName="PARYAVARAN MARATHON" />
 
       <main className="flex-1">
         <HeroSection
-          eventName={settings.eventName}
+          eventName="PARYAVARAN MARATHON"
           tagline={settings.eventTagline}
           eventDate={settings.eventDate}
           eventTime={settings.eventTime}
@@ -53,6 +53,8 @@ export default async function HomePage() {
           fee={settings.registrationFee}
           capacity={settings.participantCapacity}
         />
+
+        <PrizeSection />
 
         <RaceDetails
           eventDate={settings.eventDate}
@@ -64,14 +66,13 @@ export default async function HomePage() {
 
         <RouteSection />
 
-        <BenefitsSection />
+        <AboutSection />
 
         <EligibilityRules />
 
         <FaqSection />
 
         <ContactSection
-          contactEmail={settings.contactEmail}
           contactPhone={settings.contactPhone}
           venue={settings.venue}
           organizerName={settings.organizerName}
@@ -79,9 +80,8 @@ export default async function HomePage() {
       </main>
 
       <Footer
-        eventName={settings.eventName}
+        eventName="Paryavaran Marathon Samastipur"
         organizerName={settings.organizerName}
-        contactEmail={settings.contactEmail}
         contactPhone={settings.contactPhone}
         venue={settings.venue}
       />

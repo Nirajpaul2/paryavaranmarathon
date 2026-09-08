@@ -53,7 +53,7 @@ export default function AdminLoginPage() {
             Race Director Portal
           </h1>
           <p className="text-xs text-slate-400">
-            10 KM Marathon Registration &amp; Manual Payment Verification System
+            Paryavaran Marathon 2026 — 5 KM Registration &amp; Manual Payment Verification System
           </p>
         </div>
 

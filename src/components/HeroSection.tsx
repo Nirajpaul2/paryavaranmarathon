@@ -1,6 +1,17 @@
 import React from "react";
 import Link from "next/link";
-import { Calendar, Clock, MapPin, Trophy, Users, ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import Image from "next/image";
+import {
+  Calendar,
+  MapPin,
+  Trophy,
+  ArrowRight,
+  ShieldCheck,
+  Leaf,
+  Users,
+  Phone,
+  Sparkles,
+} from "lucide-react";
 
 interface HeroSectionProps {
   eventName: string;
@@ -22,103 +33,151 @@ export default function HeroSection({
   capacity,
 }: HeroSectionProps) {
   return (
-    <section className="relative overflow-hidden pt-12 pb-24 lg:pt-20 lg:pb-32">
-      {/* Background athletic glow highlights */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-600/15 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute top-1/3 right-10 w-[300px] h-[300px] bg-yellow-500/10 rounded-full blur-2xl pointer-events-none -z-10" />
+    <section className="relative overflow-hidden pt-8 pb-20 lg:pt-14 lg:pb-28">
+      {/* Botanical nature background glows */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-emerald-600/15 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/3 right-10 w-[350px] h-[350px] bg-lime-500/10 rounded-full blur-2xl pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-4xl mx-auto space-y-6">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider shadow-inner">
-            <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-            <span>Official 10 KM Timed Road Challenge • Edition 2026</span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* Left Column: Headlines & Call to Actions */}
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+            {/* Top Go Green Badges */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-black uppercase tracking-wider">
+                <Leaf className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />
+                Go Green Initiative
+              </span>
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold uppercase tracking-wider">
+                <Trophy className="w-3.5 h-3.5 text-amber-400" />
+                5 KM Running Challenge
+              </span>
+            </div>
+
+            {/* Main Title */}
+            <div className="space-y-2">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.08] uppercase">
+                पर्यावरण मैराथन
+                <span className="block text-2xl sm:text-3xl lg:text-4xl font-extrabold text-emerald-400 tracking-wider mt-1">
+                  PARYAVARAN MARATHON
+                </span>
+                <span className="block text-xl sm:text-2xl font-bold text-amber-300 tracking-widest mt-1">
+                  SAMASTIPUR • मालती
+                </span>
+              </h1>
+            </div>
+
+            {/* Main Slogan from Banner */}
+            <div className="bg-[#0a2e1d]/80 border-l-4 border-emerald-500 p-4 rounded-r-2xl max-w-xl mx-auto lg:mx-0">
+              <p className="text-xl sm:text-2xl font-black text-emerald-200 italic">
+                “हर कदम प्रकृति के नाम”
+              </p>
+              <p className="text-xs sm:text-sm font-semibold text-emerald-300/90 mt-0.5">
+                Fit For a Greener Tomorrow
+              </p>
+            </div>
+
+            {/* Event Key Highlights Strip */}
+            <div className="space-y-2 text-xs sm:text-sm text-emerald-100 max-w-xl mx-auto lg:mx-0 text-left">
+              <div className="flex items-start gap-2.5">
+                <Calendar className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <span>
+                  <strong>दिनांक:</strong> 27 सितंबर 2026 (रविवार)
+                </span>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <span>
+                  <strong>स्थान:</strong> राजकीय उत्क्रमित मध्य विद्यालय मालती पूर्वी, समस्तीपुर
+                </span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>
+                  <strong>हेल्पलाइन:</strong> 8340477782 (संस्थापक: नीरज स्टार)
+                </span>
+              </div>
+            </div>
+
+            {/* Registration Fee & Action CTAs */}
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <Link
+                href="/register"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl eco-gradient text-white text-base font-black shadow-xl shadow-emerald-700/40 hover:opacity-95 hover:scale-105 active:scale-95 transition-all border border-emerald-400/40"
+              >
+                <span>Register Now — ₹{fee}</span>
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link
+                href="#prizes"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl bg-emerald-950/80 hover:bg-emerald-900/80 border border-emerald-700/70 text-emerald-200 text-sm font-bold transition-all hover:text-white"
+              >
+                <span>🏆 View Prizes (Cycle, Shoes, Jersey)</span>
+              </Link>
+            </div>
+
+            <div className="flex items-center justify-center lg:justify-start gap-2 text-xs text-emerald-300/80 pt-1">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <span>Direct PhonePe QR Registration • Official Bib • ₹99 Entry</span>
+            </div>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight uppercase leading-[1.08]">
-            Run <span className="text-transparent bg-clip-text athletic-gradient">10 KM</span>.
-            <br />
-            Challenge Yourself.
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-400">
-              Finish Strong.
-            </span>
-          </h1>
-
-          {/* Subheading */}
-          <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            {tagline || "Join us for an unforgettable 10 KM running experience."} Lace up your shoes,
-            push your limits, and run alongside thousands of passionate athletes.
-          </p>
-
-          {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link
-              href="/register"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl athletic-gradient text-white text-base font-extrabold shadow-xl shadow-orange-600/30 hover:opacity-95 hover:scale-105 active:scale-95 transition-all"
-            >
-              <span>Register Now — ₹{fee}</span>
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link
-              href="#about"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-slate-200 text-base font-bold transition-all hover:text-white"
-            >
-              Race Details
-            </Link>
-          </div>
-
-          {/* Payment method trust note */}
-          <div className="flex items-center justify-center gap-2 text-xs text-slate-400 pt-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>Instant PhonePe QR Payment • Verified by Race Officials • Official Bib</span>
+          {/* Right Column: Official Banner Image Card */}
+          <div className="lg:col-span-5 flex justify-center">
+            <div className="relative max-w-sm sm:max-w-md w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-emerald-600/40 group hover:border-emerald-500 transition-all bg-[#092e1e]">
+              <Image
+                src="/images/paryavaran-banner.jpg"
+                alt="पर्यावरण मैराथन समस्तीपुर - 5 KM दौड़ आधिकारिक पोस्टर"
+                width={720}
+                height={1080}
+                className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-300"
+                priority
+              />
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 text-center">
+                <span className="inline-block px-3 py-1 rounded-full bg-emerald-600 text-white text-[11px] font-black uppercase tracking-wider shadow">
+                  Official Event Poster • मालती समस्तीपुर
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Highlight Stats Bar */}
+        {/* 4 Core Quick Highlights */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
-          {/* Card 1: Distance */}
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 text-center hover:border-orange-500/40 transition-colors">
-            <div className="text-orange-400 font-extrabold text-2xl sm:text-3xl mb-1 flex items-center justify-center gap-1">
-              <Trophy className="w-6 h-6 text-orange-500" />
-              10 KM
+          <div className="bg-[#08291b] border border-emerald-800/80 rounded-2xl p-5 text-center hover:border-emerald-500 transition-colors shadow-lg">
+            <div className="text-emerald-400 font-extrabold text-2xl sm:text-3xl mb-1">
+              5 KM
             </div>
-            <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold">
-              Certified Distance
+            <div className="text-xs uppercase tracking-wider text-emerald-200/80 font-bold">
+              पर्यावरण दौड़ (Run)
             </div>
           </div>
 
-          {/* Card 2: Date & Time */}
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 text-center hover:border-orange-500/40 transition-colors">
-            <div className="text-white font-extrabold text-lg sm:text-xl mb-1 flex items-center justify-center gap-1 truncate">
-              <Calendar className="w-5 h-5 text-orange-400 shrink-0" />
-              <span className="truncate">{eventDate.split(",")[0] || "Race Day"}</span>
+          <div className="bg-[#08291b] border border-emerald-800/80 rounded-2xl p-5 text-center hover:border-emerald-500 transition-colors shadow-lg">
+            <div className="text-white font-extrabold text-lg sm:text-xl mb-1">
+              27 Sep 2026
             </div>
-            <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold">
-              Flag-off {eventTime}
+            <div className="text-xs uppercase tracking-wider text-emerald-200/80 font-bold">
+              रविवार (Sunday)
             </div>
           </div>
 
-          {/* Card 3: Venue */}
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 text-center hover:border-orange-500/40 transition-colors">
-            <div className="text-white font-extrabold text-base sm:text-lg mb-1 flex items-center justify-center gap-1 truncate">
-              <MapPin className="w-5 h-5 text-orange-400 shrink-0" />
-              <span className="truncate">Central Stadium</span>
+          <div className="bg-[#08291b] border border-emerald-800/80 rounded-2xl p-5 text-center hover:border-emerald-500 transition-colors shadow-lg">
+            <div className="text-amber-400 font-extrabold text-2xl sm:text-3xl mb-1">
+              ₹99/-
             </div>
-            <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold truncate">
-              {venue}
+            <div className="text-xs uppercase tracking-wider text-emerald-200/80 font-bold">
+              रजिस्ट्रेशन शुल्क
             </div>
           </div>
 
-          {/* Card 4: Capacity */}
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 text-center hover:border-orange-500/40 transition-colors">
-            <div className="text-white font-extrabold text-2xl sm:text-3xl mb-1 flex items-center justify-center gap-1">
-              <Users className="w-6 h-6 text-orange-400" />
-              {capacity}
+          <div className="bg-[#08291b] border border-emerald-800/80 rounded-2xl p-5 text-center hover:border-emerald-500 transition-colors shadow-lg">
+            <div className="text-white font-extrabold text-lg sm:text-xl mb-1 flex items-center justify-center gap-1">
+              <Trophy className="w-5 h-5 text-amber-400" />
+              Cycle, Shoes
             </div>
-            <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold">
-              Runner Slots
+            <div className="text-xs uppercase tracking-wider text-emerald-200/80 font-bold">
+              Top 30 Medals
             </div>
           </div>
         </div>
