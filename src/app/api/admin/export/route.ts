@@ -78,7 +78,7 @@ export async function GET(req: NextRequest) {
       escapeCsv(r.createdAt.toISOString()),
     ]);
 
-    const csvContent = [
+    const csvContent = "\uFEFF" + [
       headers.join(","),
       ...rows.map((row) => row.join(",")),
     ].join("\n");

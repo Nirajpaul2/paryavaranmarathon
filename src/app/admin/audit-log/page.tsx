@@ -103,8 +103,12 @@ export default async function AdminAuditLogPage() {
                         <span className="font-bold text-white block">
                           {log.registration?.participant?.fullName || "Participant"}
                         </span>
-                        <span className="text-[10px] font-mono text-slate-500">
-                          {log.registration?.bibNumber || log.registration?.registrationNumber || log.registrationId.slice(0, 8)}
+                        <span className="text-[10px] font-mono text-slate-400">
+                          {log.registration?.bibNumber || log.registration?.registrationNumber ? (
+                            <strong className="text-orange-400 font-bold">No. {log.registration?.bibNumber || log.registration?.registrationNumber}</strong>
+                          ) : (
+                            log.registrationId.slice(0, 8)
+                          )}
                         </span>
                       </td>
 

@@ -123,12 +123,14 @@ export default function PaymentsClient({
         return;
       }
 
+      const assignedNum = data.bibNumber || data.registrationNumber || "001";
+
       setFeedback({
         type: "success",
-        message: `Payment approved! Participant confirmed and Bib assigned.`,
+        message: `Payment approved! Participant confirmed with Registration & Bib No. ${assignedNum}.`,
       });
 
-      // Update local state
+      // Update local state immediately so BIB / REG NO. column updates to the assigned number
       setPayments((prev) =>
         prev.map((p) =>
           p.id === item.id
@@ -138,6 +140,8 @@ export default function PaymentsClient({
                 registration: {
                   ...p.registration,
                   status: "CONFIRMED",
+                  bibNumber: assignedNum,
+                  registrationNumber: assignedNum,
                 },
               }
             : p
@@ -381,13 +385,13 @@ export default function PaymentsClient({
                       )}
                     </td>
 
-                    <td className="px-4 py-4 font-mono text-xs">
-                      {item.registration.bibNumber ? (
-                        <span className="font-bold text-orange-400 block">
-                          {item.registration.bibNumber}
+                    <td className="px-4 py-4 font-mono text-xs whitespace-nowrap min-w-[110px]">
+                      {item.registration.status === "CONFIRMED" && (item.registration.bibNumber || item.registration.registrationNumber) ? (
+                        <span className="font-black text-orange-400 block text-sm tracking-wider">
+                          {item.registration.bibNumber || item.registration.registrationNumber}
                         </span>
                       ) : (
-                        <span className="text-slate-500">Unassigned</span>
+                        <span className="text-slate-500 italic">Unassigned</span>
                       )}
                     </td>
 

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { getAuthenticatedAdmin } from "@/lib/auth";
 import { PaymentVerificationSchema } from "@/lib/validations";
-import { generateRegistrationAndBibNumbers } from "@/lib/bibGenerator";
+import { getNextSequentialNumber } from "@/lib/sequenceGenerator";
 
 export async function POST(req: NextRequest) {
   try {
@@ -45,10 +45,20 @@ export async function POST(req: NextRequest) {
     const oldRegStatus = registration.status;
 
     if (action === "APPROVE") {
-      // Generate Bib and Registration Numbers
-      const { registrationNumber, bibNumber } = await generateRegistrationAndBibNumbers();
+      let assignedNumber = "";
 
       await prisma.$transaction(async (tx) => {
+        const settings = await tx.eventSetting.findFirst();
+        const eventId = settings?.id || "default";
+
+        // Check if registration already has a valid sequential 3+ digit number
+        const existingNum = registration.registrationNumber;
+        if (existingNum && /^\d{3,}$/.test(existingNum)) {
+          assignedNumber = existingNum;
+        } else {
+          assignedNumber = await getNextSequentialNumber(tx, eventId);
+        }
+
         // Update Payment
         await tx.payment.upsert({
           where: { registrationId },
@@ -60,7 +70,7 @@ export async function POST(req: NextRequest) {
           },
           create: {
             registrationId,
-            amount: 100,
+            amount: settings?.registrationFee || 99,
             status: "VERIFIED",
             verifiedAt: new Date(),
             verifiedBy: admin.email,
@@ -72,8 +82,8 @@ export async function POST(req: NextRequest) {
           where: { id: registrationId },
           data: {
             status: "CONFIRMED",
-            registrationNumber: registration.registrationNumber || registrationNumber,
-            bibNumber: registration.bibNumber || bibNumber,
+            registrationNumber: assignedNumber,
+            bibNumber: assignedNumber,
           },
         });
 
@@ -87,14 +97,16 @@ export async function POST(req: NextRequest) {
             newPaymentStatus: "VERIFIED",
             oldRegStatus,
             newRegStatus: "CONFIRMED",
-            notes: `Approved payment for participant ${registration.participant.fullName}. Bib: ${registration.bibNumber || bibNumber}`,
+            notes: `Approved payment for participant ${registration.participant.fullName}. Registration & Bib No: ${assignedNumber}`,
           },
         });
       });
 
       return NextResponse.json({
         success: true,
-        message: "Payment successfully verified and Registration confirmed with Bib assigned.",
+        registrationNumber: assignedNumber,
+        bibNumber: assignedNumber,
+        message: `Payment successfully verified and Registration confirmed with number ${assignedNumber}.`,
       });
     } else {
       // REJECT ACTION

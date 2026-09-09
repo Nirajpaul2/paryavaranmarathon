@@ -99,3 +99,9 @@ model PaymentAuditLog {
   notes             String?
   timestamp         DateTime     @default(now())
 }
+
+model RegistrationSequence {
+  eventId   String   @id @default("default")
+  lastSeq   Int      @default(0)
+  updatedAt DateTime @updatedAt
+}

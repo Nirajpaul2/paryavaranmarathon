@@ -244,7 +244,7 @@ export default function RegistrationsClient({
               <tr>
                 <th className="px-4 py-3.5">Runner Name</th>
                 <th className="px-4 py-3.5">Contact Details</th>
-                <th className="px-4 py-3.5">Bib Number</th>
+                <th className="px-4 py-3.5">BIB / REG NO.</th>
                 <th className="px-4 py-3.5">Reg Status</th>
                 <th className="px-4 py-3.5">T-Shirt &amp; Blood</th>
                 <th className="px-4 py-3.5">Payment</th>
@@ -275,15 +275,14 @@ export default function RegistrationsClient({
                       <span className="text-[10px] text-slate-500">{item.participant.email}</span>
                     </td>
 
-                    <td className="px-4 py-3.5 font-mono">
-                      {item.bibNumber ? (
-                        <span className="font-black text-orange-400">{item.bibNumber}</span>
+                    <td className="px-4 py-3.5 font-mono min-w-[110px]">
+                      {item.status === "CONFIRMED" && (item.bibNumber || item.registrationNumber) ? (
+                        <span className="font-black text-orange-400 text-sm block tracking-wider">
+                          {item.bibNumber || item.registrationNumber}
+                        </span>
                       ) : (
-                        <span className="text-slate-500 text-[11px]">Unassigned</span>
+                        <span className="text-slate-500 italic text-xs">Unassigned</span>
                       )}
-                      <span className="text-[10px] text-slate-500 block">
-                        {item.registrationNumber || item.id.slice(0, 8)}
-                      </span>
                     </td>
 
                     <td className="px-4 py-3.5">
@@ -388,7 +387,12 @@ export default function RegistrationsClient({
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl animate-in zoom-in-95">
             <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h3 className="text-lg font-bold text-white uppercase">Participant Profile</h3>
+              <div>
+                <h3 className="text-lg font-bold text-white uppercase">Participant Profile</h3>
+                <span className="text-xs text-orange-400 font-mono font-bold">
+                  BIB / REG NO: {viewingItem.status === "CONFIRMED" ? (viewingItem.bibNumber || viewingItem.registrationNumber || "Unassigned") : "Unassigned"}
+                </span>
+              </div>
               <button
                 onClick={() => setViewingItem(null)}
                 className="p-1 text-slate-400 hover:text-white"
