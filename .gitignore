@@ -38,3 +38,5 @@ next-env.d.ts
 !/uploads/.gitkeep
 /prisma/*.db
 /prisma/*.db-journal
+/prisma/*.db.bak
+*.bak
