@@ -13,7 +13,11 @@ export interface WhatsAppMessageData {
   venue: string;
   organizerName: string;
   passLink?: string;
+  appLink?: string;
 }
+
+export const SANATAN_DHAM_APP_URL =
+  "https://play.google.com/store/apps/details?id=com.aiwazir.sanatan.app";
 
 export const DEFAULT_WHATSAPP_TEMPLATE = `Hello {Participant Name},
 
@@ -32,6 +36,9 @@ Your payment has been successfully verified.
 
 View Digital Pass:
 {Pass Link}
+
+Download Sanatan Dham App (1 Month Free Access):
+{App Link}
 
 Please keep this message for your records and bring your registration/Bib details on event day.
 
@@ -115,7 +122,8 @@ export function formatWhatsAppMessage(
     .replace(/{Event Date}/g, data.eventDate)
     .replace(/{Venue}/g, data.venue)
     .replace(/{Organizer Name}/g, data.organizerName)
-    .replace(/{Pass Link}/g, data.passLink || "https://paryavaranmarathon.nirajpaul.com/lookup");
+    .replace(/{Pass Link}/g, data.passLink || "https://paryavaranmarathon.nirajpaul.com/lookup")
+    .replace(/{App Link}/g, data.appLink || SANATAN_DHAM_APP_URL);
 }
 
 /**

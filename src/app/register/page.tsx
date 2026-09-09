@@ -16,7 +16,6 @@ import {
   AlertTriangle,
   ArrowRight,
   ShieldCheck,
-  Trophy,
   Loader2,
   ChevronLeft,
   Gift,
@@ -47,9 +46,6 @@ export default function RegisterPage() {
     state: "",
     emergencyName: "",
     emergencyMobile: "",
-    tshirtSize: "M",
-    bloodGroup: "O+",
-    runningExp: "First-time 5K runner",
   });
 
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -102,16 +98,13 @@ export default function RegisterPage() {
     if (!formData.city.trim()) errors.city = "City is required.";
     if (!formData.state.trim()) errors.state = "State is required.";
 
-    if (!formData.emergencyName.trim()) {
-      errors.emergencyName = "Emergency contact name is required.";
-    }
-
-    if (!/^[6-9]\d{9}$/.test(formData.emergencyMobile.trim())) {
-      errors.emergencyMobile = "Enter a valid 10-digit emergency contact number.";
-    }
-
-    if (formData.emergencyMobile === formData.mobile) {
-      errors.emergencyMobile = "Emergency contact should be a different number from your mobile.";
+    // Emergency contact details are optional
+    if (formData.emergencyMobile.trim()) {
+      if (!/^[6-9]\d{9}$/.test(formData.emergencyMobile.trim())) {
+        errors.emergencyMobile = "Enter a valid 10-digit emergency contact number.";
+      } else if (formData.emergencyMobile.trim() === formData.mobile.trim()) {
+        errors.emergencyMobile = "Emergency contact should be a different number from your mobile.";
+      }
     }
 
     setFieldErrors(errors);
@@ -437,24 +430,29 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-                {/* Section 2: Emergency Contact */}
+                {/* Section 2: Emergency Contact (Optional) */}
                 <div className="space-y-4">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-orange-400 border-b border-slate-800 pb-2 flex items-center gap-2">
-                    <HeartHandshake className="w-4 h-4" />
-                    Emergency Contact Details
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-orange-400 border-b border-slate-800 pb-2 flex items-center justify-between">
+                    <span className="flex items-center gap-2">
+                      <HeartHandshake className="w-4 h-4" />
+                      Emergency Contact Details
+                    </span>
+                    <span className="text-[10px] text-slate-500 font-normal lowercase tracking-normal">
+                      (optional)
+                    </span>
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                        Emergency Contact Name <span className="text-orange-500">*</span>
+                        Emergency Contact Name <span className="text-slate-500 text-[10px] font-normal lowercase">(optional)</span>
                       </label>
                       <input
                         type="text"
                         name="emergencyName"
                         value={formData.emergencyName}
                         onChange={handleInputChange}
-                        placeholder="e.g. Sunita Sharma (Spouse / Parent)"
+                        placeholder="e.g. Relative / Friend name"
                         className={`w-full bg-slate-950 border ${
                           fieldErrors.emergencyName ? "border-rose-500" : "border-slate-800"
                         } rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-orange-500 transition-colors`}
@@ -468,7 +466,7 @@ export default function RegisterPage() {
 
                     <div>
                       <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                        Emergency Contact Phone <span className="text-orange-500">*</span>
+                        Emergency Contact Phone <span className="text-slate-500 text-[10px] font-normal lowercase">(optional)</span>
                       </label>
                       <div className="relative">
                         <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-500">
@@ -491,77 +489,6 @@ export default function RegisterPage() {
                           {fieldErrors.emergencyMobile}
                         </p>
                       )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Section 3: Runner Preferences (Optional) */}
-                <div className="space-y-4">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-orange-400 border-b border-slate-800 pb-2 flex items-center gap-2">
-                    <Trophy className="w-4 h-4" />
-                    Runner Preferences &amp; Kit
-                  </h3>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                        T-Shirt Size
-                      </label>
-                      <select
-                        name="tshirtSize"
-                        value={formData.tshirtSize}
-                        onChange={handleInputChange}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-orange-500 transition-colors"
-                      >
-                        <option value="XS">XS (Chest 36&quot;)</option>
-                        <option value="S">S (Chest 38&quot;)</option>
-                        <option value="M">M (Chest 40&quot;)</option>
-                        <option value="L">L (Chest 42&quot;)</option>
-                        <option value="XL">XL (Chest 44&quot;)</option>
-                        <option value="XXL">XXL (Chest 46&quot;)</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                        Blood Group
-                      </label>
-                      <select
-                        name="bloodGroup"
-                        value={formData.bloodGroup}
-                        onChange={handleInputChange}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-orange-500 transition-colors"
-                      >
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                        <option value="Unknown">Unknown</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                        Running Experience
-                      </label>
-                      <select
-                        name="runningExp"
-                        value={formData.runningExp}
-                        onChange={handleInputChange}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-orange-500 transition-colors"
-                      >
-                        <option value="First-time 5K runner">First-time 5K runner</option>
-                        <option value="Casual runner (5K)">Casual runner (5K)</option>
-                        <option value="Seasoned 5K runner">Seasoned 5K runner</option>
-                        <option value="First-time 10K runner">First-time 10K runner</option>
-                        <option value="Half Marathon / Marathon runner">
-                          Half / Full Marathoner
-                        </option>
-                      </select>
                     </div>
                   </div>
                 </div>
@@ -631,21 +558,19 @@ export default function RegisterPage() {
                       </span>
                     </div>
 
-                    <div>
-                      <span className="text-slate-500 font-semibold uppercase block text-[11px]">
-                        T-Shirt Size &amp; Blood Group
-                      </span>
-                      <span className="text-white font-bold">
-                        Size: {formData.tshirtSize} • {formData.bloodGroup}
-                      </span>
-                    </div>
-
                     <div className="sm:col-span-2 pt-2 border-t border-slate-800">
                       <span className="text-slate-500 font-semibold uppercase block text-[11px]">
                         Emergency Contact
                       </span>
                       <span className="text-white font-bold">
-                        {formData.emergencyName} (+91 {formData.emergencyMobile})
+                        {formData.emergencyName.trim() || formData.emergencyMobile.trim() ? (
+                          <>
+                            {formData.emergencyName.trim() || "Contact"}
+                            {formData.emergencyMobile.trim() && ` (+91 ${formData.emergencyMobile.trim()})`}
+                          </>
+                        ) : (
+                          <span className="text-slate-400 font-normal">Not provided (Optional)</span>
+                        )}
                       </span>
                     </div>
                   </div>
@@ -728,10 +653,6 @@ export default function RegisterPage() {
                 <div className="flex justify-between items-center py-2 border-b border-slate-800">
                   <span className="text-slate-400">Awards &amp; Prizes</span>
                   <span className="font-bold text-emerald-400">Top 10 Prizes • Top 30 Medals</span>
-                </div>
-                <div className="flex justify-between items-center py-2 border-b border-slate-800">
-                  <span className="text-slate-400">Runner Kit</span>
-                  <span className="font-bold text-emerald-400">T-Shirt &amp; Official Kit</span>
                 </div>
               </div>
 
