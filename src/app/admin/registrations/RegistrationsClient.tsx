@@ -15,13 +15,36 @@ import {
   FileSpreadsheet,
   Ticket,
   Loader2,
+  Copy,
+  Check,
+  AlertTriangle,
 } from "lucide-react";
+import {
+  normalizeIndianPhoneNumber,
+  formatWhatsAppMessage,
+  buildWhatsAppUrl,
+} from "@/lib/whatsapp";
+
+function WhatsAppIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      className={className}
+      fill="currentColor"
+    >
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+    </svg>
+  );
+}
 
 interface RegistrationItem {
   id: string;
   registrationNumber: string | null;
   bibNumber: string | null;
   status: string;
+  whatsappOpenedAt?: Date | string | null;
   createdAt: Date | string;
   participant: {
     id: string;
@@ -47,10 +70,21 @@ interface RegistrationItem {
   } | null;
 }
 
+interface EventSettingsProp {
+  eventName: string;
+  eventDate: string;
+  venue: string;
+  distance: string;
+  organizerName: string;
+  whatsappTemplate?: string | null;
+}
+
 export default function RegistrationsClient({
   initialRegistrations,
+  eventSettings,
 }: {
   initialRegistrations: RegistrationItem[];
+  eventSettings?: EventSettingsProp;
 }) {
   const router = useRouter();
   const [registrations, setRegistrations] = useState<RegistrationItem[]>(initialRegistrations);
@@ -68,6 +102,97 @@ export default function RegistrationsClient({
     emergencyMobile: "",
   });
   const [loading, setLoading] = useState(false);
+
+  // WhatsApp Modal states
+  const [previewWhatsAppItem, setPreviewWhatsAppItem] = useState<RegistrationItem | null>(null);
+  const [previewMessageText, setPreviewMessageText] = useState<string>("");
+  const [whatsAppPhoneError, setWhatsAppPhoneError] = useState<string | null>(null);
+  const [copiedMessage, setCopiedMessage] = useState(false);
+  const [whatsAppTrackingLoading, setWhatsAppTrackingLoading] = useState(false);
+
+  const handleInitiateWhatsApp = (item: RegistrationItem) => {
+    if (item.status !== "CONFIRMED" || !(item.registrationNumber || item.bibNumber)) {
+      alert(
+        "WhatsApp confirmation is only available for confirmed registrations with assigned Bib/Reg number."
+      );
+      return;
+    }
+
+    const phoneValidation = normalizeIndianPhoneNumber(item.participant.mobile);
+    if (!phoneValidation.valid || !phoneValidation.normalized) {
+      alert(
+        phoneValidation.error ||
+          "Valid mobile number is required to send WhatsApp confirmation."
+      );
+      return;
+    }
+
+    const regNum = item.registrationNumber || item.bibNumber || "001";
+    const bibNum = item.bibNumber || item.registrationNumber || "001";
+
+    const msg = formatWhatsAppMessage(eventSettings?.whatsappTemplate, {
+      participantName: item.participant.fullName,
+      eventName: eventSettings?.eventName || "पर्यावरण मैराथन (Paryavaran Marathon 2026)",
+      registrationNumber: regNum,
+      bibNumber: bibNum,
+      distance: eventSettings?.distance || "5 KM",
+      eventDate: eventSettings?.eventDate || "27 सितंबर 2026 (रविवार)",
+      venue: eventSettings?.venue || "राजकीय उत्क्रमित मध्य विद्यालय मालती पूर्वी",
+      organizerName: eventSettings?.organizerName || "संस्थापक: नीरज स्टार",
+      passLink: `https://paryavaranmarathon.nirajpaul.com/card/${item.id}`,
+    });
+
+    setPreviewMessageText(msg);
+    setWhatsAppPhoneError(null);
+    setCopiedMessage(false);
+    setPreviewWhatsAppItem(item);
+  };
+
+  const handleConfirmOpenWhatsApp = async () => {
+    if (!previewWhatsAppItem) return;
+
+    const phoneValidation = normalizeIndianPhoneNumber(
+      previewWhatsAppItem.participant.mobile
+    );
+    if (!phoneValidation.valid || !phoneValidation.normalized) {
+      setWhatsAppPhoneError(
+        phoneValidation.error ||
+          "Valid mobile number is required to send WhatsApp confirmation."
+      );
+      return;
+    }
+
+    const targetUrl = buildWhatsAppUrl(phoneValidation.normalized, previewMessageText);
+    window.open(targetUrl, "_blank", "noopener,noreferrer");
+
+    try {
+      setWhatsAppTrackingLoading(true);
+      const res = await fetch("/api/admin/whatsapp-opened", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ registrationId: previewWhatsAppItem.id }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        const openedAt = data.whatsappOpenedAt || new Date().toISOString();
+        setRegistrations((prev) =>
+          prev.map((r) =>
+            r.id === previewWhatsAppItem.id
+              ? {
+                  ...r,
+                  whatsappOpenedAt: openedAt,
+                }
+              : r
+          )
+        );
+      }
+    } catch (err) {
+      console.error("Failed to log WhatsApp opened status:", err);
+    } finally {
+      setWhatsAppTrackingLoading(false);
+      setPreviewWhatsAppItem(null);
+    }
+  };
 
   const filtered = registrations.filter((r) => {
     if (statusFilter !== "ALL" && r.status !== statusFilter) {
@@ -244,7 +369,7 @@ export default function RegistrationsClient({
               <tr>
                 <th className="px-4 py-3.5">Runner Name</th>
                 <th className="px-4 py-3.5">Contact Details</th>
-                <th className="px-4 py-3.5">Bib Number</th>
+                <th className="px-4 py-3.5">BIB / REG NO.</th>
                 <th className="px-4 py-3.5">Reg Status</th>
                 <th className="px-4 py-3.5">T-Shirt &amp; Blood</th>
                 <th className="px-4 py-3.5">Payment</th>
@@ -275,15 +400,14 @@ export default function RegistrationsClient({
                       <span className="text-[10px] text-slate-500">{item.participant.email}</span>
                     </td>
 
-                    <td className="px-4 py-3.5 font-mono">
-                      {item.bibNumber ? (
-                        <span className="font-black text-orange-400">{item.bibNumber}</span>
+                    <td className="px-4 py-3.5 font-mono min-w-[110px]">
+                      {item.status === "CONFIRMED" && (item.bibNumber || item.registrationNumber) ? (
+                        <span className="font-black text-orange-400 text-sm block tracking-wider">
+                          {item.bibNumber || item.registrationNumber}
+                        </span>
                       ) : (
-                        <span className="text-slate-500 text-[11px]">Unassigned</span>
+                        <span className="text-slate-500 italic text-xs">Unassigned</span>
                       )}
-                      <span className="text-[10px] text-slate-500 block">
-                        {item.registrationNumber || item.id.slice(0, 8)}
-                      </span>
                     </td>
 
                     <td className="px-4 py-3.5">
@@ -365,6 +489,24 @@ export default function RegistrationsClient({
                         </Link>
                       )}
 
+                      {item.status === "CONFIRMED" && (
+                        <button
+                          onClick={() => handleInitiateWhatsApp(item)}
+                          className={`p-1.5 rounded-lg transition-colors inline-block ${
+                            item.whatsappOpenedAt
+                              ? "bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30"
+                              : "bg-emerald-600 hover:bg-emerald-500 text-white"
+                          }`}
+                          title={
+                            item.whatsappOpenedAt
+                              ? "WhatsApp Opened (Click to re-open)"
+                              : "Send WhatsApp Confirmation"
+                          }
+                        >
+                          <WhatsAppIcon className="w-3.5 h-3.5 fill-current" />
+                        </button>
+                      )}
+
                       {item.status !== "CANCELLED" && (
                         <button
                           onClick={() => handleCancelRegistration(item)}
@@ -387,8 +529,11 @@ export default function RegistrationsClient({
       {viewingItem && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl animate-in zoom-in-95">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h3 className="text-lg font-bold text-white uppercase">Participant Profile</h3>
+            <div className="flex items-center justify-between pb-2 border-b border-slate-800">
+              <h3 className="text-base font-bold text-white uppercase flex items-center gap-2">
+                <Eye className="w-4 h-4 text-cyan-400" />
+                Participant Profile
+              </h3>
               <button
                 onClick={() => setViewingItem(null)}
                 className="p-1 text-slate-400 hover:text-white"
@@ -462,10 +607,22 @@ export default function RegistrationsClient({
               </div>
             </div>
 
-            <div className="pt-2 flex justify-end">
+            <div className="pt-2 flex justify-between items-center gap-3">
+              {viewingItem.status === "CONFIRMED" && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleInitiateWhatsApp(viewingItem);
+                  }}
+                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md flex items-center gap-2 transition-colors"
+                >
+                  <WhatsAppIcon className="w-4 h-4 fill-current" />
+                  <span>Send WhatsApp</span>
+                </button>
+              )}
               <button
                 onClick={() => setViewingItem(null)}
-                className="px-5 py-2.5 rounded-xl bg-slate-800 text-xs font-bold text-white hover:bg-slate-700"
+                className="px-5 py-2.5 rounded-xl bg-slate-800 text-xs font-bold text-white hover:bg-slate-700 ml-auto"
               >
                 Close
               </button>
@@ -583,6 +740,129 @@ export default function RegistrationsClient({
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* WhatsApp Confirmation Preview Modal */}
+      {previewWhatsAppItem && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 space-y-5 shadow-2xl animate-in zoom-in-95">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
+                  <WhatsAppIcon className="w-5 h-5 fill-current" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-white uppercase tracking-wide">
+                    WhatsApp Confirmation
+                  </h3>
+                  <span className="text-[11px] text-slate-400">
+                    Official Click-to-Chat Deep Link
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={() => setPreviewWhatsAppItem(null)}
+                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Recipient summary */}
+            <div className="bg-slate-950/80 rounded-2xl p-3.5 border border-slate-800 space-y-1.5 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-slate-400">Participant:</span>
+                <span className="font-bold text-white">
+                  {previewWhatsAppItem.participant.fullName}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-400">Mobile Number:</span>
+                <span className="font-mono text-emerald-400 font-bold">
+                  {(() => {
+                    const res = normalizeIndianPhoneNumber(
+                      previewWhatsAppItem.participant.mobile
+                    );
+                    return res.valid ? `+${res.normalized}` : previewWhatsAppItem.participant.mobile;
+                  })()}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-400">BIB / REG NO.:</span>
+                <span className="font-mono font-black text-orange-400 text-sm">
+                  {previewWhatsAppItem.registrationNumber ||
+                    previewWhatsAppItem.bibNumber ||
+                    "001"}
+                </span>
+              </div>
+            </div>
+
+            {whatsAppPhoneError && (
+              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold flex items-center gap-2">
+                <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                <span>{whatsAppPhoneError}</span>
+              </div>
+            )}
+
+            {/* Message Preview */}
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-xs font-bold uppercase text-slate-300">
+                  Confirmation Message Preview (Editable)
+                </label>
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard.writeText(previewMessageText);
+                    setCopiedMessage(true);
+                    setTimeout(() => setCopiedMessage(false), 2000);
+                  }}
+                  className="text-[11px] font-semibold text-slate-400 hover:text-white flex items-center gap-1 transition-colors"
+                >
+                  {copiedMessage ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span className="text-emerald-400">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy Message</span>
+                    </>
+                  )}
+                </button>
+              </div>
+              <textarea
+                rows={10}
+                value={previewMessageText}
+                onChange={(e) => setPreviewMessageText(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-200 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition-colors leading-relaxed"
+              />
+              <p className="text-[11px] text-slate-400 mt-1.5 leading-normal">
+                Clicking <strong>Open WhatsApp ↗</strong> will launch WhatsApp with this message pre-filled. You will review and tap Send inside WhatsApp.
+              </p>
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-2 border-t border-slate-800">
+              <button
+                type="button"
+                onClick={() => setPreviewWhatsAppItem(null)}
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmOpenWhatsApp}
+                disabled={whatsAppTrackingLoading}
+                className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg shadow-emerald-950/50 flex items-center gap-2 transition-colors disabled:opacity-50"
+              >
+                <WhatsAppIcon className="w-4 h-4 fill-current" />
+                <span>{whatsAppTrackingLoading ? "Opening..." : "Open WhatsApp ↗"}</span>
+              </button>
+            </div>
           </div>
         </div>
       )}

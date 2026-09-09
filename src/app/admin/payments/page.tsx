@@ -24,9 +24,25 @@ export default async function AdminPaymentsPage() {
     },
   });
 
+  const eventSettings = await prisma.eventSetting.findFirst();
+
   return (
     <AdminLayout adminName={admin.name}>
-      <PaymentsClient initialPayments={payments} />
+      <PaymentsClient
+        initialPayments={payments}
+        eventSettings={
+          eventSettings
+            ? {
+                eventName: eventSettings.eventName,
+                eventDate: eventSettings.eventDate,
+                venue: eventSettings.venue,
+                distance: eventSettings.distance,
+                organizerName: eventSettings.organizerName,
+                whatsappTemplate: eventSettings.whatsappTemplate,
+              }
+            : undefined
+        }
+      />
     </AdminLayout>
   );
 }

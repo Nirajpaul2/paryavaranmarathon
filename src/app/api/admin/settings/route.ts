@@ -83,6 +83,7 @@ export async function POST(req: NextRequest) {
           phonePeUpiId: body.phonePeUpiId,
           bibPrefix: body.bibPrefix,
           regPrefix: body.regPrefix,
+          whatsappTemplate: body.whatsappTemplate !== undefined ? body.whatsappTemplate : undefined,
         },
         create: {
           id: "default",
@@ -101,6 +102,7 @@ export async function POST(req: NextRequest) {
           phonePeUpiId: body.phonePeUpiId,
           bibPrefix: body.bibPrefix,
           regPrefix: body.regPrefix,
+          whatsappTemplate: body.whatsappTemplate || null,
         },
       });
 

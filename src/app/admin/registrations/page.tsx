@@ -21,9 +21,25 @@ export default async function AdminRegistrationsPage() {
     },
   });
 
+  const eventSettings = await prisma.eventSetting.findFirst();
+
   return (
     <AdminLayout adminName={admin.name}>
-      <RegistrationsClient initialRegistrations={registrations} />
+      <RegistrationsClient
+        initialRegistrations={registrations}
+        eventSettings={
+          eventSettings
+            ? {
+                eventName: eventSettings.eventName,
+                eventDate: eventSettings.eventDate,
+                venue: eventSettings.venue,
+                distance: eventSettings.distance,
+                organizerName: eventSettings.organizerName,
+                whatsappTemplate: eventSettings.whatsappTemplate,
+              }
+            : undefined
+        }
+      />
     </AdminLayout>
   );
 }

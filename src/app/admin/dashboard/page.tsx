@@ -201,11 +201,13 @@ export default async function AdminDashboardPage() {
                         <span className="text-[10px] text-slate-500">{reg.participant.email}</span>
                       </td>
 
-                      <td className="px-4 py-3.5 font-mono">
-                        {reg.bibNumber ? (
-                          <span className="font-bold text-orange-400">{reg.bibNumber}</span>
+                      <td className="px-4 py-3.5 font-mono min-w-[110px]">
+                        {reg.status === "CONFIRMED" && (reg.bibNumber || reg.registrationNumber) ? (
+                          <span className="font-bold text-orange-400 block text-sm">
+                            {reg.bibNumber || reg.registrationNumber}
+                          </span>
                         ) : (
-                          <span className="text-slate-500">{reg.registrationNumber || "Unassigned"}</span>
+                          <span className="text-slate-500 italic text-xs">Unassigned</span>
                         )}
                       </td>
 

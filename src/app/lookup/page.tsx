@@ -108,7 +108,7 @@ export default function LookupPage() {
                 required
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
-                placeholder="Enter Mobile Number (e.g. 9876543210) or Email..."
+                placeholder="Enter Mobile, Email, or Bib / Reg No (e.g. 001)..."
                 className="w-full bg-slate-950 border border-slate-800 rounded-2xl pl-12 pr-32 py-4 text-sm sm:text-base text-white placeholder-slate-600 focus:outline-none focus:border-orange-500 transition-colors"
               />
               <Search className="w-5 h-5 text-slate-500 absolute left-4 top-1/2 -translate-y-1/2" />

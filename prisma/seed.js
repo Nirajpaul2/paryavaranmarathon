@@ -40,22 +40,22 @@ async function main() {
   }
 
   // 2. Seed Default SuperAdmin
-  const adminEmail = "admin@marathon10k.com";
+  const adminEmail = "sourav.com";
   const existingAdmin = await prisma.adminUser.findUnique({
     where: { email: adminEmail },
   });
 
   if (!existingAdmin) {
-    const passwordHash = await bcrypt.hash("Admin@Marathon2026!", 10);
+    const passwordHash = await bcrypt.hash("Admin@2026", 10);
     await prisma.adminUser.create({
       data: {
         email: adminEmail,
         passwordHash,
-        name: "Race Director",
+        name: "Saurabh Kumar",
         role: "SUPERADMIN",
       },
     });
-    console.log(`Default SuperAdmin created: ${adminEmail} / Admin@Marathon2026!`);
+    console.log(`Default SuperAdmin created: ${adminEmail}`);
   } else {
     console.log("SuperAdmin user already exists.");
   }

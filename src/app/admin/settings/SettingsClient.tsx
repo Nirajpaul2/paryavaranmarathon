@@ -16,6 +16,7 @@ import {
   IndianRupee,
   Users,
 } from "lucide-react";
+import { DEFAULT_WHATSAPP_TEMPLATE } from "@/lib/whatsapp";
 
 interface EventSettingData {
   id?: string;
@@ -36,6 +37,7 @@ interface EventSettingData {
   phonePeUpiId: string;
   bibPrefix: string;
   regPrefix: string;
+  whatsappTemplate?: string | null;
 }
 
 export default function SettingsClient({
@@ -65,6 +67,7 @@ export default function SettingsClient({
     phonePeUpiId: initialSettings?.phonePeUpiId || "7367050371@ybl",
     bibPrefix: initialSettings?.bibPrefix || "BIB-",
     regPrefix: initialSettings?.regPrefix || "RUN5K-",
+    whatsappTemplate: initialSettings?.whatsappTemplate || "",
   });
 
   const [qrPath, setQrPath] = useState(
@@ -382,6 +385,70 @@ export default function SettingsClient({
                   placeholder="RUN5K-"
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white font-mono"
                 />
+              </div>
+            </div>
+
+            {/* WhatsApp Confirmation Message Template */}
+            <div className="pt-4 border-t border-slate-800 space-y-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <label className="block text-xs font-bold uppercase text-slate-300">
+                    WhatsApp Confirmation Message Template
+                  </label>
+                  <span className="text-[11px] text-slate-500">
+                    Customize the pre-filled message when Admin clicks &quot;Send WhatsApp&quot;.
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      whatsappTemplate: DEFAULT_WHATSAPP_TEMPLATE,
+                    }))
+                  }
+                  className="text-[11px] font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+                >
+                  Load Default
+                </button>
+              </div>
+
+              <textarea
+                name="whatsappTemplate"
+                rows={7}
+                value={formData.whatsappTemplate}
+                onChange={handleInputChange}
+                placeholder={DEFAULT_WHATSAPP_TEMPLATE}
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs font-mono text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors leading-relaxed"
+              />
+
+              <div className="flex flex-wrap gap-1.5 items-center text-[10px]">
+                <span className="text-slate-500 font-semibold">Available Placeholders:</span>
+                {[
+                  "{Participant Name}",
+                  "{Event Name}",
+                  "{Registration Number}",
+                  "{Bib Number}",
+                  "{Distance}",
+                  "{Event Date}",
+                  "{Venue}",
+                  "{Organizer Name}",
+                  "{Pass Link}",
+                ].map((token) => (
+                  <button
+                    key={token}
+                    type="button"
+                    onClick={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        whatsappTemplate: (prev.whatsappTemplate || "") + " " + token,
+                      }))
+                    }
+                    className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 hover:text-emerald-300 font-mono transition-colors"
+                  >
+                    {token}
+                  </button>
+                ))}
               </div>
             </div>
 

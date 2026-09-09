@@ -1,24 +1,21 @@
 import prisma from "./prisma";
+import { getNextSequentialNumber, formatRegistrationNumber } from "./sequenceGenerator";
 
-export async function generateRegistrationAndBibNumbers() {
-  const settings = await prisma.eventSetting.findFirst();
-  const regPrefix = settings?.regPrefix || "RUN5K-";
-  const bibPrefix = settings?.bibPrefix || "BIB-";
+/**
+ * Generates the next sequential 3-digit registration and bib numbers (e.g. 001, 002, 100, 105).
+ * Synchronizes registrationNumber and bibNumber to the exact sequential 3-digit value.
+ */
+export async function generateRegistrationAndBibNumbers(tx?: any) {
+  const db = tx || prisma;
+  const settings = await db.eventSetting.findFirst();
+  const eventId = settings?.id || "default";
 
-  // Count existing confirmed registrations to calculate the next sequence number
-  const confirmedCount = await prisma.registration.count({
-    where: {
-      status: "CONFIRMED",
-      bibNumber: { not: null },
-    },
-  });
-
-  const nextSeq = confirmedCount + 1;
-  const registrationNumber = `${regPrefix}${String(nextSeq).padStart(6, "0")}`;
-  const bibNumber = `${bibPrefix}${1000 + nextSeq}`;
+  const sequentialNumber = await getNextSequentialNumber(db, eventId);
 
   return {
-    registrationNumber,
-    bibNumber,
+    registrationNumber: sequentialNumber,
+    bibNumber: sequentialNumber,
   };
 }
+
+export { formatRegistrationNumber, getNextSequentialNumber };

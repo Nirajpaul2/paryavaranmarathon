@@ -5,23 +5,27 @@ export async function POST(req: NextRequest) {
   try {
     const { identifier } = await req.json();
 
-    if (!identifier || typeof identifier !== "string" || identifier.trim().length < 4) {
+    if (!identifier || typeof identifier !== "string" || identifier.trim().length < 1) {
       return NextResponse.json(
         {
           success: false,
-          error: "Please enter a valid Mobile Number, Email, or Registration Number.",
+          error: "Please enter a valid Mobile Number, Email, or Registration / Bib Number.",
         },
         { status: 400 }
       );
     }
 
     const query = identifier.trim();
+    const query3Digit = /^\d+$/.test(query) ? query.padStart(3, "0") : query;
 
     // Query participant or registration
     const registration = await prisma.registration.findFirst({
       where: {
         OR: [
-          { registrationNumber: query.toUpperCase() },
+          { registrationNumber: query },
+          { registrationNumber: query3Digit },
+          { bibNumber: query },
+          { bibNumber: query3Digit },
           { id: query },
           { participant: { mobile: query } },
           { participant: { email: query.toLowerCase() } },
