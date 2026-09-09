@@ -125,14 +125,5 @@ npm start
 
 ---
 
-## 🔐 Default Admin Credentials
-- **Portal**: `/admin/login`
-- **Email**: `admin@marathon10k.com`
-- **Password**: `Admin@Marathon2026!`
-
-*(Please change the admin password and secret key after initial setup in production).*
-
----
-
 ## 📄 License
 Private & Proprietary — पर्यावरण मैराथन (Paryavaran Marathon Samastipur).

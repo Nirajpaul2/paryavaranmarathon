@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Flame, Lock, Mail, ArrowRight, Loader2, AlertTriangle, ShieldCheck } from "lucide-react";
+import { Flame, Lock, Mail, ArrowRight, Loader2, AlertTriangle } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -77,7 +77,7 @@ export default function AdminLoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@marathon10k.com"
+                  placeholder="admin@paryavaranmarathon.org"
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-orange-500 transition-colors"
                 />
                 <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -119,15 +119,6 @@ export default function AdminLoginPage() {
               )}
             </button>
           </form>
-
-          <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-[11px] text-slate-400 space-y-1">
-            <div className="flex items-center gap-1.5 text-slate-300 font-bold">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              Default Credentials for Initial Setup:
-            </div>
-            <p>Email: <code className="text-orange-400 font-mono">admin@marathon10k.com</code></p>
-            <p>Password: <code className="text-orange-400 font-mono">Admin@Marathon2026!</code></p>
-          </div>
         </div>
 
         <div className="text-center">
