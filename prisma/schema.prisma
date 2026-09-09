@@ -26,6 +26,7 @@ model EventSetting {
   phonePeUpiId         String   @default("7367050371@ybl")
   bibPrefix            String   @default("BIB-")
   regPrefix            String   @default("RUN5K-")
+  whatsappTemplate     String?
   updatedAt            DateTime @updatedAt
 }
 
@@ -55,6 +56,7 @@ model Registration {
   participantId      String            @unique
   participant        Participant       @relation(fields: [participantId], references: [id], onDelete: Cascade)
   status             String            @default("PENDING") // PENDING, CONFIRMED, REJECTED, CANCELLED
+  whatsappOpenedAt   DateTime?
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
   payment            Payment?
