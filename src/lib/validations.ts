@@ -68,7 +68,7 @@ export const PaymentSubmissionSchema = z.object({
 });
 
 export const AdminLoginSchema = z.object({
-  email: z.string().email("Please enter a valid email address").toLowerCase(),
+  email: z.string().min(3, "Please enter a valid admin email or username").toLowerCase().trim(),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 

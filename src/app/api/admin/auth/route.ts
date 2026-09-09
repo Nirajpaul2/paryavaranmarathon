@@ -16,9 +16,16 @@ export async function POST(req: NextRequest) {
     }
 
     const { email, password } = result.data;
+    const input = email.trim().toLowerCase();
 
-    const admin = await prisma.adminUser.findUnique({
-      where: { email },
+    const admin = await prisma.adminUser.findFirst({
+      where: {
+        OR: [
+          { email: input },
+          { email: input.replace(/@.*$/, "") + ".com" },
+          { email: input.replace(/\.com$/, "@gmail.com") },
+        ],
+      },
     });
 
     if (!admin) {
