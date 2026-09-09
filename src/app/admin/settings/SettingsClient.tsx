@@ -434,6 +434,7 @@ export default function SettingsClient({
                   "{Venue}",
                   "{Organizer Name}",
                   "{Pass Link}",
+                  "{App Link}",
                 ].map((token) => (
                   <button
                     key={token}
