@@ -55,8 +55,8 @@ interface RegistrationItem {
     gender: string;
     city: string;
     state: string;
-    emergencyName: string;
-    emergencyMobile: string;
+    emergencyName: string | null;
+    emergencyMobile: string | null;
     tshirtSize: string | null;
     bloodGroup: string | null;
     runningExp: string | null;
@@ -227,8 +227,8 @@ export default function RegistrationsClient({
       fullName: item.participant.fullName,
       tshirtSize: item.participant.tshirtSize || "M",
       bloodGroup: item.participant.bloodGroup || "O+",
-      emergencyName: item.participant.emergencyName,
-      emergencyMobile: item.participant.emergencyMobile,
+      emergencyName: item.participant.emergencyName || "",
+      emergencyMobile: item.participant.emergencyMobile || "",
     });
   };
 
@@ -594,7 +594,14 @@ export default function RegistrationsClient({
                   Emergency Contact
                 </span>
                 <span className="text-white font-medium">
-                  {viewingItem.participant.emergencyName} (+91 {viewingItem.participant.emergencyMobile})
+                  {viewingItem.participant.emergencyName || viewingItem.participant.emergencyMobile ? (
+                    <>
+                      {viewingItem.participant.emergencyName || "Contact"}
+                      {viewingItem.participant.emergencyMobile && ` (+91 ${viewingItem.participant.emergencyMobile})`}
+                    </>
+                  ) : (
+                    <span className="text-slate-500">Not provided</span>
+                  )}
                 </span>
               </div>
               <div className="col-span-2 pt-2 border-t border-slate-800">
@@ -698,11 +705,10 @@ export default function RegistrationsClient({
 
               <div>
                 <label className="block text-slate-300 font-bold uppercase mb-1">
-                  Emergency Contact Name
+                  Emergency Contact Name <span className="text-slate-500 font-normal lowercase">(optional)</span>
                 </label>
                 <input
                   type="text"
-                  required
                   value={editForm.emergencyName}
                   onChange={(e) => setEditForm({ ...editForm, emergencyName: e.target.value })}
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white"
@@ -711,12 +717,11 @@ export default function RegistrationsClient({
 
               <div>
                 <label className="block text-slate-300 font-bold uppercase mb-1">
-                  Emergency Contact Mobile
+                  Emergency Contact Mobile <span className="text-slate-500 font-normal lowercase">(optional)</span>
                 </label>
                 <input
                   type="tel"
                   maxLength={10}
-                  required
                   value={editForm.emergencyMobile}
                   onChange={(e) => setEditForm({ ...editForm, emergencyMobile: e.target.value })}
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white"

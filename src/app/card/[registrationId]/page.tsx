@@ -151,7 +151,9 @@ export default async function RegistrationCardPage({ params }: CardPageProps) {
                   Emergency Phone
                 </span>
                 <span className="text-sm font-bold text-white print:text-black">
-                  +91 {registration.participant.emergencyMobile}
+                  {registration.participant.emergencyMobile
+                    ? `+91 ${registration.participant.emergencyMobile}`
+                    : "Not Provided"}
                 </span>
               </div>
             </div>

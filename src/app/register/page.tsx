@@ -98,16 +98,13 @@ export default function RegisterPage() {
     if (!formData.city.trim()) errors.city = "City is required.";
     if (!formData.state.trim()) errors.state = "State is required.";
 
-    if (!formData.emergencyName.trim()) {
-      errors.emergencyName = "Emergency contact name is required.";
-    }
-
-    if (!/^[6-9]\d{9}$/.test(formData.emergencyMobile.trim())) {
-      errors.emergencyMobile = "Enter a valid 10-digit emergency contact number.";
-    }
-
-    if (formData.emergencyMobile === formData.mobile) {
-      errors.emergencyMobile = "Emergency contact should be a different number from your mobile.";
+    // Emergency contact details are optional
+    if (formData.emergencyMobile.trim()) {
+      if (!/^[6-9]\d{9}$/.test(formData.emergencyMobile.trim())) {
+        errors.emergencyMobile = "Enter a valid 10-digit emergency contact number.";
+      } else if (formData.emergencyMobile.trim() === formData.mobile.trim()) {
+        errors.emergencyMobile = "Emergency contact should be a different number from your mobile.";
+      }
     }
 
     setFieldErrors(errors);
@@ -433,24 +430,29 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-                {/* Section 2: Emergency Contact */}
+                {/* Section 2: Emergency Contact (Optional) */}
                 <div className="space-y-4">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-orange-400 border-b border-slate-800 pb-2 flex items-center gap-2">
-                    <HeartHandshake className="w-4 h-4" />
-                    Emergency Contact Details
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-orange-400 border-b border-slate-800 pb-2 flex items-center justify-between">
+                    <span className="flex items-center gap-2">
+                      <HeartHandshake className="w-4 h-4" />
+                      Emergency Contact Details
+                    </span>
+                    <span className="text-[10px] text-slate-500 font-normal lowercase tracking-normal">
+                      (optional)
+                    </span>
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                        Emergency Contact Name <span className="text-orange-500">*</span>
+                        Emergency Contact Name <span className="text-slate-500 text-[10px] font-normal lowercase">(optional)</span>
                       </label>
                       <input
                         type="text"
                         name="emergencyName"
                         value={formData.emergencyName}
                         onChange={handleInputChange}
-                        placeholder="e.g. Sunita Sharma (Spouse / Parent)"
+                        placeholder="e.g. Relative / Friend name"
                         className={`w-full bg-slate-950 border ${
                           fieldErrors.emergencyName ? "border-rose-500" : "border-slate-800"
                         } rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-orange-500 transition-colors`}
@@ -464,7 +466,7 @@ export default function RegisterPage() {
 
                     <div>
                       <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                        Emergency Contact Phone <span className="text-orange-500">*</span>
+                        Emergency Contact Phone <span className="text-slate-500 text-[10px] font-normal lowercase">(optional)</span>
                       </label>
                       <div className="relative">
                         <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-500">
@@ -561,7 +563,14 @@ export default function RegisterPage() {
                         Emergency Contact
                       </span>
                       <span className="text-white font-bold">
-                        {formData.emergencyName} (+91 {formData.emergencyMobile})
+                        {formData.emergencyName.trim() || formData.emergencyMobile.trim() ? (
+                          <>
+                            {formData.emergencyName.trim() || "Contact"}
+                            {formData.emergencyMobile.trim() && ` (+91 ${formData.emergencyMobile.trim()})`}
+                          </>
+                        ) : (
+                          <span className="text-slate-400 font-normal">Not provided (Optional)</span>
+                        )}
                       </span>
                     </div>
                   </div>

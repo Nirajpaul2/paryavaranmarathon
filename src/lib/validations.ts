@@ -32,13 +32,18 @@ export const RegistrationSchema = z.object({
   state: z.string().min(2, "State is required").max(100).trim(),
   emergencyName: z
     .string()
-    .min(2, "Emergency contact name is required")
     .max(100)
-    .trim(),
+    .trim()
+    .optional()
+    .or(z.literal("")),
   emergencyMobile: z
     .string()
-    .regex(/^[6-9]\d{9}$/, "Please enter a valid 10-digit emergency contact number")
-    .trim(),
+    .trim()
+    .optional()
+    .refine((val) => !val || /^[6-9]\d{9}$/.test(val), {
+      message: "Please enter a valid 10-digit emergency contact number",
+    })
+    .or(z.literal("")),
   tshirtSize: z.enum(["XS", "S", "M", "L", "XL", "XXL"]).optional(),
   bloodGroup: z
     .enum(["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-", "Unknown"])

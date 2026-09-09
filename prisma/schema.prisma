@@ -39,8 +39,8 @@ model Participant {
   gender          String
   city            String
   state           String
-  emergencyName   String
-  emergencyMobile String
+  emergencyName   String?
+  emergencyMobile String?
   tshirtSize      String?
   bloodGroup      String?
   runningExp      String?

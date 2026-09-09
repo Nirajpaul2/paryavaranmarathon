@@ -56,8 +56,14 @@ export async function PATCH(
           fullName: body.participant.fullName || registration.participant.fullName,
           tshirtSize: body.participant.tshirtSize || registration.participant.tshirtSize,
           bloodGroup: body.participant.bloodGroup || registration.participant.bloodGroup,
-          emergencyName: body.participant.emergencyName || registration.participant.emergencyName,
-          emergencyMobile: body.participant.emergencyMobile || registration.participant.emergencyMobile,
+          emergencyName:
+            body.participant.emergencyName !== undefined
+              ? body.participant.emergencyName?.trim() || null
+              : registration.participant.emergencyName,
+          emergencyMobile:
+            body.participant.emergencyMobile !== undefined
+              ? body.participant.emergencyMobile?.trim() || null
+              : registration.participant.emergencyMobile,
         },
       });
 
