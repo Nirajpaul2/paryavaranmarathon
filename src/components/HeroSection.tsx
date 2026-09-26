@@ -97,7 +97,15 @@ export default function HeroSection({
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong>स्थान:</strong> राजकीय उत्क्रमित मध्य विद्यालय मालती पूर्वी, समस्तीपुर
+                  <strong>स्थान:</strong> {venue || "राजकीय उत्क्रमित मध्य विद्यालय मालती पूर्वी, समस्तीपुर"}{" "}
+                  <a
+                    href="https://www.google.com/maps/place/Saurabh+super+store/@25.8315539,85.8138031,13.14z/data=!4m14!1m7!3m6!1s0x39ed910063c15091:0x2892b03bad3d7306!2sSaurabh+super+store!8m2!3d25.8256946!4d85.8242428!16s%2Fg%2F11zx46dyfv!3m5!1s0x39ed910063c15091:0x2892b03bad3d7306!8m2!3d25.8256946!4d85.8242428!16s%2Fg%2F11zx46dyfv?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 underline font-semibold text-xs ml-1"
+                  >
+                    <span>(Google Maps 📍)</span>
+                  </a>
                 </span>
               </div>
               <div className="flex items-center gap-2.5">

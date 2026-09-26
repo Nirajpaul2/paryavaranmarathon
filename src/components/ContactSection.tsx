@@ -62,6 +62,17 @@ export default function ContactSection({
             <h3 className="text-base font-bold text-white uppercase">दौड़ स्थल (Venue)</h3>
             <p className="text-xs text-emerald-300/70">मालती, समस्तीपुर</p>
             <p className="text-xs font-bold text-white leading-relaxed">{venue}</p>
+            <div className="pt-2">
+              <a
+                href="https://www.google.com/maps/place/Saurabh+super+store/@25.8315539,85.8138031,13.14z/data=!4m14!1m7!3m6!1s0x39ed910063c15091:0x2892b03bad3d7306!2sSaurabh+super+store!8m2!3d25.8256946!4d85.8242428!16s%2Fg%2F11zx46dyfv!3m5!1s0x39ed910063c15091:0x2892b03bad3d7306!8m2!3d25.8256946!4d85.8242428!16s%2Fg%2F11zx46dyfv?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 text-amber-300 hover:text-white border border-emerald-500/40 text-xs font-bold transition-all shadow-sm"
+              >
+                <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                <span>Google Maps Location 📍</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

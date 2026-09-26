@@ -646,9 +646,19 @@ export default function RegisterPage() {
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-slate-800">
                   <span className="text-slate-400">Venue</span>
-                  <span className="font-bold text-white text-right max-w-[180px]">
-                    राजकीय उत्क्रमित मध्य विद्यालय मालती पूर्वी
-                  </span>
+                  <div className="text-right max-w-[200px]">
+                    <span className="font-bold text-white text-xs block">
+                      राजकीय उत्क्रमित मध्य विद्यालय मालती पूर्वी
+                    </span>
+                    <a
+                      href="https://www.google.com/maps/place/Saurabh+super+store/@25.8315539,85.8138031,13.14z/data=!4m14!1m7!3m6!1s0x39ed910063c15091:0x2892b03bad3d7306!2sSaurabh+super+store!8m2!3d25.8256946!4d85.8242428!16s%2Fg%2F11zx46dyfv!3m5!1s0x39ed910063c15091:0x2892b03bad3d7306!8m2!3d25.8256946!4d85.8242428!16s%2Fg%2F11zx46dyfv?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-amber-400 hover:text-amber-300 underline text-[10px] font-semibold inline-flex items-center gap-1"
+                    >
+                      <span>Google Location 📍</span>
+                    </a>
+                  </div>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-slate-800">
                   <span className="text-slate-400">Awards &amp; Prizes</span>

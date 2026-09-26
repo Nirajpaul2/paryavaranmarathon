@@ -183,6 +183,16 @@ export default async function RegistrationCardPage({ params }: CardPageProps) {
                 <span className="font-bold text-white print:text-black truncate block">
                   {venue}
                 </span>
+                <div className="print:hidden pt-0.5">
+                  <a
+                    href="https://www.google.com/maps/place/Saurabh+super+store/@25.8315539,85.8138031,13.14z/data=!4m14!1m7!3m6!1s0x39ed910063c15091:0x2892b03bad3d7306!2sSaurabh+super+store!8m2!3d25.8256946!4d85.8242428!16s%2Fg%2F11zx46dyfv!3m5!1s0x39ed910063c15091:0x2892b03bad3d7306!8m2!3d25.8256946!4d85.8242428!16s%2Fg%2F11zx46dyfv?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-amber-400 hover:text-amber-300 underline text-[10px] font-semibold"
+                  >
+                    Google Maps 📍
+                  </a>
+                </div>
               </div>
             </div>
 
