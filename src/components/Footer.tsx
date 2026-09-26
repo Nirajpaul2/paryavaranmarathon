@@ -73,6 +73,11 @@ export default function Footer({
                 </Link>
               </li>
               <li>
+                <Link href="/#location" className="hover:text-amber-300 transition-colors text-amber-400 font-semibold">
+                  📍 गूगल मैप लोकेशन (Venue Map)
+                </Link>
+              </li>
+              <li>
                 <Link href="/#faq" className="hover:text-emerald-400 transition-colors">
                   FAQs (अक्सर पूछे जाने वाले सवाल)
                 </Link>

@@ -53,6 +53,12 @@ export default function Navbar({
               5 KM Route
             </Link>
             <Link
+              href="/#location"
+              className="text-sm font-medium text-amber-300 hover:text-amber-200 transition-colors flex items-center gap-1"
+            >
+              <span>📍 मैप लोकेशन</span>
+            </Link>
+            <Link
               href="/#about"
               className="text-sm font-medium text-emerald-200 hover:text-emerald-400 transition-colors"
             >
@@ -140,6 +146,13 @@ export default function Navbar({
             className="block py-2 text-base font-medium text-emerald-100 hover:text-emerald-300"
           >
             5 KM Route
+          </Link>
+          <Link
+            href="/#location"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-base font-bold text-amber-300 hover:text-amber-200"
+          >
+            📍 गूगल मैप लोकेशन (Venue Map)
           </Link>
           <Link
             href="/#about"

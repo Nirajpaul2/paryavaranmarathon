@@ -9,6 +9,7 @@ import AboutSection from "@/components/AboutSection";
 import EligibilityRules from "@/components/EligibilityRules";
 import FaqSection from "@/components/FaqSection";
 import ContactSection from "@/components/ContactSection";
+import VenueMapSection from "@/components/VenueMapSection";
 import prisma from "@/lib/prisma";
 
 export const revalidate = 60; // Refresh settings every minute
@@ -65,6 +66,12 @@ export default async function HomePage() {
         />
 
         <RouteSection />
+
+        <VenueMapSection
+          venue={settings.venue}
+          reportingTime={settings.reportingTime}
+          eventTime={settings.eventTime}
+        />
 
         <AboutSection />
 
