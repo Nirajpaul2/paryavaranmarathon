@@ -432,6 +432,7 @@ export default function SettingsClient({
                   "{Distance}",
                   "{Event Date}",
                   "{Venue}",
+                  "{Location Link}",
                   "{Organizer Name}",
                   "{Pass Link}",
                   "{App Link}",

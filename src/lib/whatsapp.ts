@@ -14,10 +14,14 @@ export interface WhatsAppMessageData {
   organizerName: string;
   passLink?: string;
   appLink?: string;
+  locationLink?: string;
 }
 
 export const SANATAN_DHAM_APP_URL =
   "https://play.google.com/store/apps/details?id=com.aiwazir.sanatan.app";
+
+export const GOOGLE_MAPS_LOCATION_URL =
+  "https://www.google.com/maps/place/Saurabh+super+store/@25.8315539,85.8138031,13.14z/data=!4m14!1m7!3m6!1s0x39ed910063c15091:0x2892b03bad3d7306!2sSaurabh+super+store!8m2!3d25.8256946!4d85.8242428!16s%2Fg%2F11zx46dyfv!3m5!1s0x39ed910063c15091:0x2892b03bad3d7306!8m2!3d25.8256946!4d85.8242428!16s%2Fg%2F11zx46dyfv?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D";
 
 export const DEFAULT_WHATSAPP_TEMPLATE = `Hello {Participant Name},
 
@@ -31,6 +35,8 @@ Registration Details:
 • Race: {Distance}
 • Event Date: {Event Date}
 • Venue: {Venue}
+• Google Location:
+{Location Link}
 
 Your payment has been successfully verified.
 
@@ -123,7 +129,9 @@ export function formatWhatsAppMessage(
     .replace(/{Venue}/g, data.venue)
     .replace(/{Organizer Name}/g, data.organizerName)
     .replace(/{Pass Link}/g, data.passLink || "https://paryavaranmarathon.nirajpaul.com/lookup")
-    .replace(/{App Link}/g, data.appLink || SANATAN_DHAM_APP_URL);
+    .replace(/{App Link}/g, data.appLink || SANATAN_DHAM_APP_URL)
+    .replace(/{Location Link}/g, data.locationLink || GOOGLE_MAPS_LOCATION_URL)
+    .replace(/{Google Maps Link}/g, data.locationLink || GOOGLE_MAPS_LOCATION_URL);
 }
 
 /**
